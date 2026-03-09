@@ -1,0 +1,202 @@
+---
+// src/components/MenuSection.astro
+import {
+  kopi, nonKopi, makananTematik,
+  makananKultural, minumanTradi,
+  gorengan, dessert
+} from '../data/menu';
+---
+
+<section class="section menu-section" id="menu">
+  <div class="section-label reveal">Pilihan Menu</div>
+  <h2 class="section-title reveal">
+    Dari Kopi Hingga<br />
+    <em style="color:var(--gold)">Rawon Otentik</em>
+  </h2>
+  <p class="section-desc reveal" style="margin-bottom:50px">
+    Dua karakter menu dalam satu tempat. Pilih sesuai mood-mu hari ini.
+  </p>
+
+  <!-- TABS -->
+  <div class="menu-tabs reveal">
+    <button class="menu-tab active" data-tab="tematik">☕ Sudut Kedai</button>
+    <button class="menu-tab" data-tab="cultural">🍲 Waroeng Soeroboyo</button>
+    <button class="menu-tab" data-tab="snacks">🍌 Camilan & Dessert</button>
+  </div>
+
+  <!-- TAB: TEMATIK -->
+  <div class="menu-panel active" id="tab-tematik">
+    <div class="menu-categories">
+      <div>
+        <div class="menu-category-title">Minuman Kopi</div>
+        <div class="menu-scroll-row">
+          {kopi.map(d => (
+            <div class="menu-drink-card">
+              <div class="drink-name">{d.name}</div>
+              <div class="drink-type">{d.type}</div>
+              <div class="drink-price">{d.price}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div>
+        <div class="menu-category-title">Non-Coffee</div>
+        <div class="menu-scroll-row">
+          {nonKopi.map(d => (
+            <div class="menu-drink-card">
+              <div class="drink-name">{d.name}</div>
+              <div class="drink-type">{d.type}</div>
+              <div class="drink-price">{d.price}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div>
+        <div class="menu-category-title">Makanan</div>
+        <div class="menu-grid">
+          {makananTematik.map(item => (
+            <div class="menu-item">
+              <div class="menu-item-name">{item.name}</div>
+              {item.sub && <div class="menu-item-sub">{item.sub}</div>}
+              <div class="menu-item-footer">
+                <span class="menu-item-price">{item.price}</span>
+                {item.tag && <span class={`menu-item-tag tag-${item.tag}`}>
+                  {item.tag === 'andalan' ? 'Andalan' : item.tag === 'new' ? 'New' : 'Hits'}
+                </span>}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB: CULTURAL -->
+  <div class="menu-panel" id="tab-cultural">
+    <div class="menu-categories">
+      <div>
+        <div class="menu-category-title">Menu Utama — Waroeng Soeroboyo Lawas</div>
+        <div class="menu-grid">
+          {makananKultural.map(item => (
+            <div class="menu-item">
+              <div class="menu-item-name">{item.name}</div>
+              {item.sub && <div class="menu-item-sub">{item.sub}</div>}
+              <div class="menu-item-footer">
+                <span class="menu-item-price">{item.price}</span>
+                {item.tag && <span class={`menu-item-tag tag-${item.tag}`}>
+                  {item.tag === 'andalan' ? '⭐ Andalan' : item.tag === 'new' ? 'New' : 'Hits'}
+                </span>}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div>
+        <div class="menu-category-title">Minuman Tradisional</div>
+        <div class="menu-scroll-row">
+          {minumanTradi.map(d => (
+            <div class="menu-drink-card">
+              <div class="drink-name">{d.name}</div>
+              <div class="drink-type">{d.type}</div>
+              <div class="drink-price">{d.price}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB: SNACKS -->
+  <div class="menu-panel" id="tab-snacks">
+    <div class="menu-categories">
+      <div>
+        <div class="menu-category-title">Gorengan & Camilan</div>
+        <div class="menu-grid">
+          {gorengan.map(item => (
+            <div class="menu-item">
+              <div class="menu-item-name">{item.name}</div>
+              {item.sub && <div class="menu-item-sub">{item.sub}</div>}
+              <div class="menu-item-footer">
+                <span class="menu-item-price">{item.price}</span>
+                {item.tag && <span class={`menu-item-tag tag-${item.tag}`}>
+                  {item.tag === 'andalan' ? 'Andalan' : item.tag === 'new' ? 'New' : 'Hits'}
+                </span>}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div>
+        <div class="menu-category-title">Dessert & Roti Bakar</div>
+        <div class="menu-grid">
+          {dessert.map(item => (
+            <div class="menu-item">
+              <div class="menu-item-name">{item.name}</div>
+              {item.sub && <div class="menu-item-sub">{item.sub}</div>}
+              <div class="menu-item-footer">
+                <span class="menu-item-price">{item.price}</span>
+                {item.tag && <span class={`menu-item-tag tag-${item.tag}`}>
+                  {item.tag === 'andalan' ? 'Andalan' : item.tag === 'new' ? 'New' : 'Hits'}
+                </span>}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .menu-section { background: var(--bg2); }
+  .menu-tabs {
+    display: flex;
+    border: 1px solid rgba(201,151,58,0.2);
+    border-radius: 4px;
+    width: fit-content;
+    margin-bottom: 60px;
+    overflow: hidden;
+  }
+  .menu-tab {
+    padding: 14px 36px;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    background: transparent;
+    border: none;
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.3s;
+    font-family: var(--font-body);
+  }
+  .menu-tab.active { background: var(--terra); color: #fff; }
+  .menu-tab:hover:not(.active) { color: var(--cream); }
+  .menu-panel { display: none; }
+  .menu-panel.active { display: block; }
+  .menu-categories { display: flex; flex-direction: column; gap: 60px; }
+  .menu-category-title {
+    font-family: var(--font-display);
+    font-size: 13px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .menu-category-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(201,151,58,0.2);
+  }
+  .menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2px;
+  }
+  @media (max-width: 768px) {
+    .menu-tabs { flex-wrap: wrap; width: 100%; }
+  }
+</style>

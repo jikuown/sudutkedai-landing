@@ -1,0 +1,415 @@
+---
+// src/pages/index.astro
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Hero from '../components/Hero.astro';
+import MarqueeBand from '../components/MarqueeBand.astro';
+import MenuSection from '../components/MenuSection.astro';
+import '../styles/global.css';
+---
+
+<Layout>
+  <!-- CURSOR -->
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <Navbar />
+  <Hero />
+  <MarqueeBand />
+
+  <!-- TENTANG -->
+  <section class="section" id="tentang">
+    <div class="section-label reveal">Tentang Kami</div>
+    <h2 class="section-title reveal">Dua Dunia,<br />Satu <em style="font-style:italic;color:var(--gold)">Tempat</em></h2>
+    <p class="section-desc reveal">
+      Kami hadir sebagai ruang ketiga yang merangkul dua identitas kuliner —
+      modernitas kafe masa kini dan kekayaan warisan masakan Jawa Timur yang tak lekang waktu.
+    </p>
+
+    <div class="dual-brand">
+      <div class="brand-card modern reveal">
+        <div class="brand-icon">☕</div>
+        <h3 class="brand-name">Sudut Kedai</h3>
+        <p class="brand-tagline">The Modern Café Wing</p>
+        <p class="brand-desc">
+          Spot nongkrong modern dengan menu kopi specialty, makanan kekinian,
+          dan suasana yang Instagramable. Cocok untuk anak muda, work-from-cafe,
+          hingga gathering santai.
+          <br /><br />
+          <strong style="color:var(--cream)">IG: @sudutkedai_</strong>
+        </p>
+      </div>
+      <div class="brand-card traditional reveal">
+        <div class="brand-icon">🍲</div>
+        <h3 class="brand-name">Waroeng Soeroboyo Lawas</h3>
+        <p class="brand-tagline">The Heritage Kitchen</p>
+        <p class="brand-desc">
+          Menyuguhkan masakan Jawa Timur otentik yang kaya rasa — dari Rawon,
+          Lontong Cap Gomeh, hingga Rujak Cingur. Dibuat dengan resep lawas
+          yang terjaga turun-temurun.
+          <br /><br />
+          <strong style="color:var(--cream)">IG: @waroenglawass</strong>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FASILITAS -->
+  <div class="facilities-wrap">
+    <div class="facilities reveal">
+      {[
+        { icon: "🎵", name: "Live Music", desc: "Hiburan live music setiap malam untuk menemani momen santai kamu" },
+        { icon: "🏛️", name: "Meeting Room", desc: "Ruang meeting berkapasitas hingga 100 orang, siap untuk segala acara" },
+        { icon: "📸", name: "Instagramable", desc: "Desain interior yang aesthetic, sempurna untuk konten media sosial" },
+        { icon: "🚗", name: "Parkir Luas", desc: "Area parkir yang cukup untuk kunjungan rombongan maupun keluarga" },
+      ].map(f => (
+        <div class="facility-card">
+          <span class="facility-icon">{f.icon}</span>
+          <div class="facility-name">{f.name}</div>
+          <p class="facility-desc">{f.desc}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <MenuSection />
+
+  <!-- EVENT / BUFFET -->
+  <section class="section" id="event">
+    <div class="section-label reveal">Social Event</div>
+    <h2 class="section-title reveal">Paket Buffet<br /><em style="color:var(--gold)">Sudut Lawas</em></h2>
+    <p class="section-desc reveal">Cocok untuk birthday, arisan, reuni, engagement, hingga gathering kantor.</p>
+
+    <div class="event-grid">
+      {[
+        {
+          flower: "🌸", name: "Lilium", tier: "Paket Hemat", price: "Rp 90.000",
+          featured: false,
+          perks: ["2 Appetizer pilihan (Cuanki & Ayam Kecombrang)", "2 Pilihan Nasi", "2 Pilihan Minuman", "Cocok untuk gathering kasual"],
+          wa: "Paket%20Lilium"
+        },
+        {
+          flower: "🌺", name: "Melati", tier: "Paket Standar", price: "Rp 105.000",
+          featured: true,
+          perks: ["2 Appetizer pilihan", "Rawon + Mie Goreng Jawa", "2 Pilihan Nasi", "2 Pilihan Minuman"],
+          wa: "Paket%20Melati"
+        },
+        {
+          flower: "🌷", name: "Anggrek", tier: "Paket Premium", price: "Rp 125.000",
+          featured: false,
+          perks: ["2 Appetizer pilihan", "Rawon atau Ayam Kecombrang (pilih 1)", "Lontong Cap Gomeh (sudah termasuk)", "2 Pilihan Nasi + 2 Minuman"],
+          wa: "Paket%20Anggrek"
+        },
+      ].map(pkg => (
+        <div class={`event-card reveal ${pkg.featured ? 'featured' : ''}`}>
+          {pkg.featured && <div class="event-badge">Terpopuler</div>}
+          <div class="event-header">
+            <span class="event-flower">{pkg.flower}</span>
+            <div class="event-name">{pkg.name}</div>
+            <div class="event-tier">{pkg.tier}</div>
+            <div class="event-price">{pkg.price} <small>/pax</small></div>
+          </div>
+          <div class="event-body">
+            <div class="event-includes">Sudah termasuk:</div>
+            <ul class="event-perks">
+              {pkg.perks.map(p => <li>{p}</li>)}
+            </ul>
+          </div>
+          <a href={`https://wa.me/6289532719664?text=Halo%2C%20saya%20mau%20tanya%20${pkg.wa}`}
+             class="event-cta" target="_blank" rel="noopener">
+            Pesan Sekarang
+          </a>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="section" style="background:var(--bg)">
+    <div class="section-label reveal">Yang Mereka Bilang</div>
+    <h2 class="section-title reveal">Cerita dari<br /><em style="color:var(--gold)">Tamu Kami</em></h2>
+    <div class="testi-grid">
+      {[
+        { initial: "R", name: "Rizky A.", via: "Google Review", quote: "Tempatnya cozy banget, cocok buat nongkrong sambil kerja atau ketemu klien. Kopi Beneran-nya beneran enak!" },
+        { initial: "S", name: "Sari W.", via: "Instagram", quote: "Rawon di sini asli enak banget, beda dari yang lain. Daging empuk, kuah hitamnya kaya rasa. Langsung jadi favorit keluarga!" },
+        { initial: "B", name: "Budi H.", via: "Event Organizer", quote: "Udah 3x booking meeting room di sini. Kapasitas 100 orang cukup, fasilitas oke, dan cateringnya selalu memuaskan." },
+      ].map(t => (
+        <div class="testi-card reveal">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-quote">{t.quote}</p>
+          <div class="testi-author">
+            <div class="testi-avatar">{t.initial}</div>
+            <div>
+              <div class="testi-name">{t.name}</div>
+              <div class="testi-via">{t.via}</div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- LOKASI -->
+  <section class="section" id="lokasi" style="background:var(--bg2)">
+    <div class="section-label reveal">Temukan Kami</div>
+    <h2 class="section-title reveal">Dua Cabang,<br /><em style="color:var(--gold)">Satu Rasa</em></h2>
+    <div class="loc-grid">
+      {[
+        {
+          branch: "Cabang Utama", name: "Metland Transyogi",
+          address: "Ruko Eboni VII No. 57-61\nJl. Metland Transyogi, Cileungsi\nBogor, Jawa Barat",
+          mapSrc: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3964.9!2d106.975!3d-6.385!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNsKwMjMnMDYuMCJTIDEwNsKwNTgnMzAuMCJF!5e0!3m2!1sid!2sid!4v1"
+        },
+        {
+          branch: "Cabang 2", name: "Citraland Cibubur",
+          address: "Woodland Park & Culinary\nGandoang, Cibubur\nBogor, Jawa Barat",
+          mapSrc: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3964.1!2d106.916!3d-6.360!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNsKwMjEnMzYuMCJTIDEwNsKwNTQnNTcuNiJF!5e0!3m2!1sid!2sid!4v1"
+        },
+      ].map(loc => (
+        <div class="loc-card reveal">
+          <div class="loc-map">
+            <iframe src={loc.mapSrc} loading="lazy" allowfullscreen title={`Peta ${loc.name}`}></iframe>
+          </div>
+          <div class="loc-body">
+            <div class="loc-branch">{loc.branch}</div>
+            <div class="loc-name">{loc.name}</div>
+            <div class="loc-address">{loc.address}</div>
+            <div class="loc-contacts">
+              <div class="loc-contact"><span class="icon">📞</span><span>0895-3271-96647</span></div>
+              <div class="loc-contact"><span class="icon">📱</span><span>0821-2875-5505</span></div>
+              <div class="loc-contact"><span class="icon">📸</span><span>@waroenglawass · @sudutkedai_</span></div>
+            </div>
+            <a href="https://wa.me/6289532719664" class="loc-btn" target="_blank" rel="noopener">💬 Chat WhatsApp</a>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="section-label reveal" style="justify-content:center;margin-bottom:24px">Reservasi & Pemesanan</div>
+    <h2 class="cta-title reveal">Siap Bikin<br />Momen yang <em>Berkesan?</em></h2>
+    <p class="cta-sub reveal">Booking meja, pesan nasi box, atau tanyakan paket event langsung ke kami via WhatsApp.</p>
+    <div class="cta-actions reveal">
+      <a href="https://wa.me/6289532719664?text=Halo%20Sudut%20Kedai%2C%20saya%20mau%20reservasi" class="btn-wa" target="_blank" rel="noopener">
+        💬 Chat WhatsApp
+      </a>
+      <a href="https://instagram.com/sudutkedai_" class="btn-secondary" target="_blank" rel="noopener">📸 Follow Instagram</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand-name">Sudut Kedai × Waroeng Soeroboyo</div>
+        <div class="footer-brand-sub">Lawas & Modern · Cileungsi, Bogor</div>
+        <p class="footer-brand-desc">Kafe modern yang memadukan kehangatan masakan Jawa Timur dengan gaya hidup urban masa kini.</p>
+        <div class="footer-socials">
+          <a href="https://instagram.com/sudutkedai_" class="footer-social" target="_blank" rel="noopener" aria-label="Instagram Sudut Kedai">📸</a>
+          <a href="https://wa.me/6289532719664" class="footer-social" target="_blank" rel="noopener" aria-label="WhatsApp">💬</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Menu</div>
+        <ul class="footer-links">
+          <li><a href="#menu">Sudut Kedai</a></li>
+          <li><a href="#menu">Waroeng Soeroboyo</a></li>
+          <li><a href="#menu">Camilan & Dessert</a></li>
+          <li><a href="#event">Paket Buffet</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Fasilitas</div>
+        <ul class="footer-links">
+          <li><a href="#tentang">Live Music</a></li>
+          <li><a href="#tentang">Meeting Room</a></li>
+          <li><a href="#event">Reservasi Acara</a></li>
+          <li><a href="#event">Nasi Box</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Kontak</div>
+        <ul class="footer-links">
+          <li><a href="tel:0895327196647">0895-3271-96647</a></li>
+          <li><a href="tel:082128755505">0821-2875-5505</a></li>
+          <li><a href="https://instagram.com/sudutkedai_" target="_blank" rel="noopener">@sudutkedai_</a></li>
+          <li><a href="https://instagram.com/waroenglawass" target="_blank" rel="noopener">@waroenglawass</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2025 Sudut Kedai × Waroeng Soeroboyo Lawas. All rights reserved.</div>
+      <a href="https://instagram.com/waroenglawass" class="footer-insta" target="_blank" rel="noopener">@waroenglawass</a>
+    </div>
+  </footer>
+</Layout>
+
+<!-- ALL PAGE-LEVEL STYLES -->
+<style is:global>
+  /* BRAND CARDS */
+  .dual-brand { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; margin-top: 80px; }
+  .brand-card { padding: 60px 50px; position: relative; overflow: hidden; transition: transform 0.4s; }
+  .brand-card:hover { transform: translateY(-4px); }
+  .brand-card.modern    { background: linear-gradient(135deg, #1a2a1c, #0f1a10); border: 1px solid rgba(61,90,62,0.4); }
+  .brand-card.traditional { background: linear-gradient(135deg, #2a1a0c, #1a0e05); border: 1px solid rgba(196,98,45,0.3); }
+  .brand-icon { width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; margin-bottom: 28px; }
+  .brand-card.modern .brand-icon { background: rgba(61,90,62,0.4); border: 1px solid rgba(61,90,62,0.6); }
+  .brand-card.traditional .brand-icon { background: rgba(196,98,45,0.2); border: 1px solid rgba(196,98,45,0.4); }
+  .brand-name    { font-family: var(--font-display); font-size: 26px; font-weight: 700; color: var(--cream); margin-bottom: 10px; }
+  .brand-tagline { font-size: 13px; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 20px; }
+  .brand-desc    { font-size: 14px; line-height: 1.8; color: var(--cream2); }
+
+  /* FACILITIES */
+  .facilities-wrap { background: var(--bg2); padding: 0 60px 100px; }
+  .facilities { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; }
+  .facility-card { padding: 36px 28px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); text-align: center; transition: all 0.3s; }
+  .facility-card:hover { background: rgba(201,151,58,0.05); border-color: rgba(201,151,58,0.2); }
+  .facility-icon { font-size: 36px; margin-bottom: 16px; display: block; }
+  .facility-name { font-family: var(--font-display); font-size: 18px; color: var(--cream); margin-bottom: 8px; }
+  .facility-desc { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+  /* EVENTS */
+  .event-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 60px; }
+  .event-card { border: 1px solid rgba(201,151,58,0.2); border-radius: 4px; overflow: hidden; transition: all 0.4s; position: relative; }
+  .event-card:hover { transform: translateY(-8px); border-color: rgba(201,151,58,0.5); box-shadow: 0 30px 60px rgba(0,0,0,0.4); }
+  .event-card.featured { border-color: var(--gold); box-shadow: 0 0 40px rgba(201,151,58,0.15); }
+  .event-badge { position: absolute; top: 20px; right: 20px; background: var(--gold); color: var(--bg); font-size: 10px; letter-spacing: 2px; text-transform: uppercase; padding: 5px 12px; border-radius: 2px; font-weight: 600; }
+  .event-header { padding: 36px 30px 28px; border-bottom: 1px solid rgba(255,255,255,0.07); }
+  .event-flower { font-size: 36px; margin-bottom: 16px; display: block; }
+  .event-name   { font-family: var(--font-display); font-size: 28px; font-weight: 700; color: var(--cream); margin-bottom: 6px; }
+  .event-tier   { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); }
+  .event-price  { font-family: var(--font-display); font-size: 42px; font-weight: 900; color: var(--gold2); line-height: 1; margin-top: 20px; }
+  .event-price small { font-size: 14px; font-family: var(--font-body); color: var(--muted); font-weight: 400; }
+  .event-body     { padding: 28px 30px; }
+  .event-includes { font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 18px; }
+  .event-perks    { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .event-perks li { display: flex; align-items: flex-start; gap: 12px; font-size: 14px; color: var(--cream2); }
+  .event-perks li::before { content: '✦'; color: var(--gold); font-size: 10px; margin-top: 3px; flex-shrink: 0; }
+  .event-cta { display: block; margin: 24px 30px 30px; background: var(--terra); color: #fff; text-align: center; padding: 14px; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; text-decoration: none; border-radius: 3px; transition: all 0.3s; border: 2px solid var(--terra); }
+  .event-card.featured .event-cta { background: var(--gold); border-color: var(--gold); color: var(--bg); font-weight: 600; }
+  .event-cta:hover { background: transparent; color: var(--terra); }
+  .event-card.featured .event-cta:hover { background: transparent; color: var(--gold); }
+
+  /* TESTIMONIALS */
+  .testi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 60px; }
+  .testi-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); padding: 32px 28px; border-radius: 4px; transition: all 0.3s; }
+  .testi-card:hover { border-color: rgba(201,151,58,0.2); transform: translateY(-4px); }
+  .testi-stars  { color: var(--gold2); font-size: 14px; letter-spacing: 2px; margin-bottom: 18px; }
+  .testi-quote  { font-family: var(--font-display); font-size: 15px; font-style: italic; color: var(--cream); line-height: 1.8; margin-bottom: 24px; }
+  .testi-quote::before { content: '"'; font-size: 40px; color: var(--terra); line-height: 0; vertical-align: -14px; margin-right: 4px; }
+  .testi-author { display: flex; align-items: center; gap: 14px; }
+  .testi-avatar { width: 44px; height: 44px; border-radius: 50%; background: var(--terra); display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 18px; color: #fff; flex-shrink: 0; }
+  .testi-name   { font-size: 14px; font-weight: 600; color: var(--cream); }
+  .testi-via    { font-size: 12px; color: var(--muted); }
+
+  /* LOCATIONS */
+  .loc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; margin-top: 60px; }
+  .loc-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); transition: all 0.4s; }
+  .loc-card:hover { border-color: rgba(201,151,58,0.3); }
+  .loc-map { height: 260px; overflow: hidden; }
+  .loc-map iframe { width: 100%; height: 100%; border: 0; filter: grayscale(0.7) invert(0.08); }
+  .loc-body    { padding: 32px 34px 36px; }
+  .loc-branch  { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--terra); margin-bottom: 14px; }
+  .loc-name    { font-family: var(--font-display); font-size: 22px; font-weight: 700; color: var(--cream); margin-bottom: 12px; line-height: 1.3; }
+  .loc-address { font-size: 14px; color: var(--cream2); line-height: 1.7; margin-bottom: 24px; white-space: pre-line; }
+  .loc-contacts { display: flex; flex-direction: column; gap: 10px; }
+  .loc-contact  { display: flex; align-items: center; gap: 12px; font-size: 13px; color: var(--cream2); }
+  .loc-contact .icon { color: var(--gold); font-size: 16px; }
+  .loc-btn { display: inline-flex; align-items: center; gap: 10px; margin-top: 24px; border: 1px solid rgba(201,151,58,0.3); color: var(--gold); padding: 12px 22px; font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; text-decoration: none; border-radius: 3px; transition: all 0.3s; }
+  .loc-btn:hover { background: rgba(201,151,58,0.1); border-color: var(--gold); }
+
+  /* CTA */
+  .cta-section { background: linear-gradient(135deg, #1c0e06, #0f1a0f); padding: 100px 60px; text-align: center; border-top: 1px solid rgba(201,151,58,0.15); position: relative; overflow: hidden; }
+  .cta-section::before { content: 'SUDUT KEDAI'; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); font-family: var(--font-display); font-size: 180px; font-weight: 900; color: rgba(255,255,255,0.02); white-space: nowrap; pointer-events: none; }
+  .cta-title { font-family: var(--font-display); font-size: clamp(36px, 5vw, 64px); color: var(--cream); line-height: 1.15; margin-bottom: 18px; position: relative; }
+  .cta-title em { color: var(--gold2); font-style: italic; }
+  .cta-sub     { font-size: 16px; color: var(--muted); margin-bottom: 44px; max-width: 500px; margin-left: auto; margin-right: auto; }
+  .cta-actions { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+
+  /* FOOTER */
+  footer { background: #0a0604; padding: 60px 60px 30px; border-top: 1px solid rgba(255,255,255,0.06); }
+  .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 60px; margin-bottom: 48px; }
+  .footer-brand-name { font-family: var(--font-display); font-size: 22px; font-weight: 700; color: var(--gold2); margin-bottom: 6px; }
+  .footer-brand-sub  { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 18px; }
+  .footer-brand-desc { font-size: 13px; color: var(--muted); line-height: 1.8; max-width: 280px; }
+  .footer-socials { display: flex; gap: 12px; margin-top: 24px; }
+  .footer-social { width: 38px; height: 38px; border: 1px solid rgba(255,255,255,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--muted); text-decoration: none; font-size: 14px; transition: all 0.3s; }
+  .footer-social:hover { border-color: var(--gold); color: var(--gold); }
+  .footer-col-title  { font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; }
+  .footer-links { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+  .footer-links a { color: var(--muted); text-decoration: none; font-size: 13px; transition: color 0.3s; }
+  .footer-links a:hover { color: var(--cream); }
+  .footer-bottom { border-top: 1px solid rgba(255,255,255,0.06); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; }
+  .footer-copy  { font-size: 12px; color: var(--muted); }
+  .footer-insta { font-size: 12px; color: var(--terra); text-decoration: none; }
+
+  /* MOBILE */
+  @media (max-width: 768px) {
+    .dual-brand    { grid-template-columns: 1fr; }
+    .facilities    { grid-template-columns: 1fr 1fr; }
+    .facilities-wrap { padding: 0 24px 70px; }
+    .event-grid    { grid-template-columns: 1fr; }
+    .testi-grid    { grid-template-columns: 1fr; }
+    .loc-grid      { grid-template-columns: 1fr; }
+    .footer-grid   { grid-template-columns: 1fr 1fr; gap: 36px; }
+    .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+    .cta-section   { padding: 70px 24px; }
+    .cta-section::before { font-size: 80px; }
+  }
+</style>
+
+<!-- CLIENT-SIDE SCRIPTS -->
+<script>
+  // CURSOR
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  if (cursor && ring) {
+    document.addEventListener('mousemove', (e) => {
+      cursor.style.left = e.clientX + 'px';
+      cursor.style.top = e.clientY + 'px';
+      setTimeout(() => {
+        ring.style.left = e.clientX + 'px';
+        ring.style.top = e.clientY + 'px';
+      }, 80);
+    });
+  }
+
+  // NAVBAR SCROLL
+  const nav = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    nav?.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // MENU TABS
+  document.querySelectorAll('.menu-tab').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const tab = (btn as HTMLElement).dataset.tab;
+      document.querySelectorAll('.menu-panel').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.menu-tab').forEach(t => t.classList.remove('active'));
+      document.getElementById(`tab-${tab}`)?.classList.add('active');
+      btn.classList.add('active');
+    });
+  });
+
+  // SCROLL REVEAL
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // MOBILE MENU
+  (window as any).toggleMenu = () => {
+    const links = document.querySelector('.nav-links') as HTMLElement;
+    if (!links) return;
+    const isOpen = links.style.display === 'flex';
+    links.style.cssText = isOpen ? '' :
+      'display:flex;flex-direction:column;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(20,14,9,.97);justify-content:center;align-items:center;gap:32px;z-index:200';
+  };
+</script>

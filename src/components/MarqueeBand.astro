@@ -1,0 +1,50 @@
+---
+// src/components/MarqueeBand.astro
+const items = [
+  "Sudut Kedai",
+  "Waroeng Soeroboyo Lawas",
+  "Live Music Setiap Malam",
+  "Meeting Room 100 Pax",
+  "Nasi Rawon Otentik",
+  "Kopi Beneran yang Beneran Enak",
+  "Instagramable & Cozy",
+  "Metland & Citraland Cibubur",
+];
+---
+
+<div class="marquee-band">
+  <div class="marquee-track">
+    {[...items, ...items].map((item) => (
+      <span>{item} <span class="dot">●</span></span>
+    ))}
+  </div>
+</div>
+
+<style>
+  .marquee-band {
+    background: var(--terra);
+    padding: 14px 0;
+    overflow: hidden;
+    white-space: nowrap;
+    border-top: 1px solid #a8441d;
+    border-bottom: 1px solid #a8441d;
+  }
+  .marquee-track {
+    display: inline-flex;
+    animation: marquee 22s linear infinite;
+  }
+  .marquee-track span {
+    display: inline-flex;
+    align-items: center;
+    gap: 20px;
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.9);
+    padding: 0 30px;
+  }
+  .dot {
+    color: rgba(255,255,255,0.4);
+    font-size: 6px;
+  }
+</style>
