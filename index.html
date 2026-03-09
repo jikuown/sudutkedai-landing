@@ -1,0 +1,1227 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sudut Kedai × Waroeng Soeroboyo Lawas — Cileungsi, Bogor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Outfit:wght@300;400;500;600&family=Noto+Serif+Javanese&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #140e09;
+    --bg2: #1c1208;
+    --cream: #f0e4cc;
+    --cream2: #d9c9a8;
+    --terra: #c4622d;
+    --gold: #c9973a;
+    --gold2: #e8b84b;
+    --green: #3d5a3e;
+    --text: #e8dcc8;
+    --muted: #8a7560;
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Outfit', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* CUSTOM CURSOR */
+  .cursor {
+    width: 10px; height: 10px;
+    background: var(--gold);
+    border-radius: 50%;
+    position: fixed; top: 0; left: 0;
+    pointer-events: none; z-index: 9999;
+    transform: translate(-50%,-50%);
+    transition: transform .1s;
+  }
+  .cursor-ring {
+    width: 36px; height: 36px;
+    border: 1.5px solid var(--gold);
+    border-radius: 50%;
+    position: fixed; top: 0; left: 0;
+    pointer-events: none; z-index: 9998;
+    transform: translate(-50%,-50%);
+    transition: all .15s ease;
+    opacity: .6;
+  }
+
+  /* NAVBAR */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 22px 60px;
+    transition: all .4s;
+  }
+  nav.scrolled {
+    background: rgba(20,14,9,.92);
+    backdrop-filter: blur(12px);
+    padding: 16px 60px;
+    border-bottom: 1px solid rgba(201,151,58,.15);
+  }
+  .nav-logo {
+    display: flex; flex-direction: column; gap: 2px;
+  }
+  .nav-logo span:first-child {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--gold2);
+    letter-spacing: .5px;
+  }
+  .nav-logo span:last-child {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .nav-links {
+    display: flex; gap: 36px; list-style: none;
+  }
+  .nav-links a {
+    color: var(--cream2);
+    text-decoration: none;
+    font-size: 13px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    transition: color .3s;
+    position: relative;
+  }
+  .nav-links a::after {
+    content: '';
+    position: absolute; bottom: -3px; left: 0; right: 0;
+    height: 1px; background: var(--gold);
+    transform: scaleX(0); transform-origin: left;
+    transition: transform .3s;
+  }
+  .nav-links a:hover { color: var(--gold2); }
+  .nav-links a:hover::after { transform: scaleX(1); }
+  .nav-cta {
+    background: var(--terra);
+    color: #fff !important;
+    padding: 10px 22px;
+    border-radius: 3px;
+    font-size: 13px !important;
+    letter-spacing: 1px !important;
+    text-transform: uppercase !important;
+    text-decoration: none;
+    transition: background .3s, transform .2s !important;
+  }
+  .nav-cta:hover { background: #a84f22 !important; transform: translateY(-1px); }
+  .nav-cta::after { display: none !important; }
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+  .hamburger span { display: block; width: 24px; height: 2px; background: var(--cream); transition: all .3s; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-left {
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 120px 60px 80px;
+    position: relative; z-index: 2;
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: rgba(201,151,58,.12);
+    border: 1px solid rgba(201,151,58,.3);
+    padding: 8px 18px; border-radius: 2px;
+    font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase;
+    color: var(--gold);
+    width: fit-content; margin-bottom: 30px;
+    animation: fadeUp .8s ease both;
+  }
+  .hero-badge::before { content: '✦'; }
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(42px, 5vw, 68px);
+    line-height: 1.08;
+    font-weight: 900;
+    color: var(--cream);
+    margin-bottom: 10px;
+    animation: fadeUp .8s ease .1s both;
+  }
+  .hero-title .accent { color: var(--gold2); font-style: italic; }
+  .hero-title .red { color: var(--terra); }
+  .hero-subtitle {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(20px, 2.5vw, 30px);
+    font-style: italic;
+    color: var(--muted);
+    margin-bottom: 28px;
+    animation: fadeUp .8s ease .2s both;
+  }
+  .hero-desc {
+    font-size: 15px; line-height: 1.8;
+    color: var(--cream2); max-width: 420px;
+    margin-bottom: 44px;
+    animation: fadeUp .8s ease .3s both;
+  }
+  .hero-actions {
+    display: flex; gap: 16px; flex-wrap: wrap;
+    animation: fadeUp .8s ease .4s both;
+  }
+  .btn-primary {
+    background: var(--terra);
+    color: #fff;
+    padding: 16px 36px;
+    font-size: 13px; letter-spacing: 2px; text-transform: uppercase;
+    text-decoration: none; border-radius: 3px;
+    transition: all .3s;
+    border: 2px solid var(--terra);
+  }
+  .btn-primary:hover { background: transparent; color: var(--terra); }
+  .btn-secondary {
+    border: 2px solid rgba(201,151,58,.4);
+    color: var(--gold);
+    padding: 16px 36px;
+    font-size: 13px; letter-spacing: 2px; text-transform: uppercase;
+    text-decoration: none; border-radius: 3px;
+    transition: all .3s;
+  }
+  .btn-secondary:hover { border-color: var(--gold); background: rgba(201,151,58,.08); }
+  .hero-stats {
+    display: flex; gap: 40px; margin-top: 60px;
+    padding-top: 36px; border-top: 1px solid rgba(255,255,255,.08);
+    animation: fadeUp .8s ease .5s both;
+  }
+  .hero-stat strong {
+    display: block;
+    font-family: 'Playfair Display', serif;
+    font-size: 32px; font-weight: 700;
+    color: var(--gold2);
+  }
+  .hero-stat span { font-size: 12px; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; }
+
+  .hero-right {
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-img-wrap {
+    position: absolute; inset: 0;
+    background:
+      linear-gradient(90deg, var(--bg) 0%, transparent 30%),
+      linear-gradient(to top, var(--bg) 0%, transparent 40%),
+      url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=900&q=80') center/cover no-repeat;
+    animation: zoomIn 8s ease both;
+  }
+  @keyframes zoomIn { from { transform: scale(1.08); } to { transform: scale(1); } }
+  .hero-float-card {
+    position: absolute; bottom: 80px; left: -30px;
+    background: rgba(28,18,8,.9);
+    border: 1px solid rgba(201,151,58,.25);
+    border-radius: 8px;
+    padding: 18px 22px;
+    backdrop-filter: blur(10px);
+    animation: fadeUp 1s ease .6s both;
+    z-index: 3;
+  }
+  .hero-float-card .label { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+  .hero-float-card .dish { font-family: 'Playfair Display', serif; font-size: 16px; color: var(--cream); font-weight: 600; }
+  .hero-float-card .price { font-size: 22px; font-weight: 600; color: var(--gold2); margin-top: 4px; }
+  .hero-float-card .badge-tag { display: inline-block; background: var(--terra); color: #fff; font-size: 10px; letter-spacing: 1px; padding: 3px 10px; border-radius: 2px; margin-top: 8px; }
+
+  /* MARQUEE BAND */
+  .marquee-band {
+    background: var(--terra);
+    padding: 14px 0;
+    overflow: hidden;
+    white-space: nowrap;
+    border-top: 1px solid #a8441d;
+    border-bottom: 1px solid #a8441d;
+  }
+  .marquee-track {
+    display: inline-flex; gap: 0;
+    animation: marquee 22s linear infinite;
+  }
+  .marquee-track span {
+    display: inline-flex; align-items: center; gap: 20px;
+    font-size: 12px; letter-spacing: 3px; text-transform: uppercase;
+    color: rgba(255,255,255,.9); padding: 0 30px;
+  }
+  .marquee-track .dot { color: rgba(255,255,255,.4); font-size: 6px; }
+  @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  /* BRAND IDENTITY */
+  .section { padding: 100px 60px; }
+  .section-label {
+    display: flex; align-items: center; gap: 14px;
+    font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 18px;
+  }
+  .section-label::before { content: ''; width: 36px; height: 1px; background: var(--gold); }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(32px, 4vw, 52px);
+    line-height: 1.12;
+    color: var(--cream);
+    margin-bottom: 20px;
+  }
+  .section-desc {
+    font-size: 15px; line-height: 1.9; color: var(--cream2);
+    max-width: 560px;
+  }
+
+  .dual-brand {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 3px;
+    margin-top: 80px;
+  }
+  .brand-card {
+    padding: 60px 50px;
+    position: relative; overflow: hidden;
+    transition: transform .4s;
+  }
+  .brand-card:hover { transform: translateY(-4px); }
+  .brand-card.modern {
+    background: linear-gradient(135deg, #1a2a1c 0%, #0f1a10 100%);
+    border: 1px solid rgba(61,90,62,.4);
+  }
+  .brand-card.traditional {
+    background: linear-gradient(135deg, #2a1a0c 0%, #1a0e05 100%);
+    border: 1px solid rgba(196,98,45,.3);
+  }
+  .brand-icon {
+    width: 56px; height: 56px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 24px; margin-bottom: 28px;
+  }
+  .brand-card.modern .brand-icon { background: rgba(61,90,62,.4); border: 1px solid rgba(61,90,62,.6); }
+  .brand-card.traditional .brand-icon { background: rgba(196,98,45,.2); border: 1px solid rgba(196,98,45,.4); }
+  .brand-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px; font-weight: 700;
+    color: var(--cream); margin-bottom: 10px;
+  }
+  .brand-tagline {
+    font-size: 13px; color: var(--muted); letter-spacing: 1px;
+    text-transform: uppercase; margin-bottom: 20px;
+  }
+  .brand-desc { font-size: 14px; line-height: 1.8; color: var(--cream2); }
+  .brand-card::after {
+    content: '';
+    position: absolute; top: -60px; right: -60px;
+    width: 180px; height: 180px;
+    border-radius: 50%;
+    opacity: .06;
+  }
+  .brand-card.modern::after { background: var(--green); }
+  .brand-card.traditional::after { background: var(--terra); }
+
+  /* MENU SECTION */
+  .menu-section { background: var(--bg2); }
+  .menu-tabs {
+    display: flex; gap: 0;
+    border: 1px solid rgba(201,151,58,.2);
+    border-radius: 4px;
+    width: fit-content;
+    margin-bottom: 60px;
+    overflow: hidden;
+  }
+  .menu-tab {
+    padding: 14px 36px;
+    font-size: 12px; letter-spacing: 2px; text-transform: uppercase;
+    background: transparent; border: none;
+    color: var(--muted); cursor: pointer;
+    transition: all .3s;
+    font-family: 'Outfit', sans-serif;
+  }
+  .menu-tab.active {
+    background: var(--terra); color: #fff;
+  }
+  .menu-tab:hover:not(.active) { color: var(--cream); }
+
+  .menu-panel { display: none; }
+  .menu-panel.active { display: block; }
+
+  .menu-categories { display: flex; flex-direction: column; gap: 60px; }
+  .menu-category-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 13px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 28px;
+    display: flex; align-items: center; gap: 16px;
+  }
+  .menu-category-title::after { content: ''; flex: 1; height: 1px; background: rgba(201,151,58,.2); }
+
+  .menu-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 2px;
+  }
+  .menu-item {
+    background: rgba(255,255,255,.03);
+    border: 1px solid rgba(255,255,255,.06);
+    padding: 22px 24px;
+    transition: all .3s;
+    cursor: default;
+  }
+  .menu-item:hover {
+    background: rgba(201,151,58,.06);
+    border-color: rgba(201,151,58,.2);
+  }
+  .menu-item-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px; font-weight: 600;
+    color: var(--cream); margin-bottom: 6px;
+    line-height: 1.3;
+  }
+  .menu-item-sub { font-size: 12px; color: var(--muted); margin-bottom: 12px; letter-spacing: .5px; }
+  .menu-item-footer { display: flex; align-items: center; justify-content: space-between; }
+  .menu-item-price { font-size: 18px; font-weight: 600; color: var(--gold2); }
+  .menu-item-tag {
+    font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase;
+    padding: 4px 10px; border-radius: 2px;
+  }
+  .tag-andalan { background: rgba(196,98,45,.2); color: var(--terra); border: 1px solid rgba(196,98,45,.3); }
+  .tag-new { background: rgba(61,90,62,.2); color: #6ab06c; border: 1px solid rgba(61,90,62,.4); }
+  .tag-hits { background: rgba(201,151,58,.15); color: var(--gold); border: 1px solid rgba(201,151,58,.3); }
+
+  /* SCROLL MENU HORIZONTAL */
+  .menu-scroll-row {
+    display: flex; gap: 2px;
+    overflow-x: auto;
+    padding-bottom: 8px;
+    scrollbar-width: thin; scrollbar-color: var(--terra) transparent;
+  }
+  .menu-scroll-row::-webkit-scrollbar { height: 3px; }
+  .menu-scroll-row::-webkit-scrollbar-thumb { background: var(--terra); }
+  .menu-drink-card {
+    flex: 0 0 200px;
+    background: rgba(255,255,255,.03);
+    border: 1px solid rgba(255,255,255,.06);
+    padding: 20px 20px;
+    transition: all .3s;
+  }
+  .menu-drink-card:hover { background: rgba(201,151,58,.06); border-color: rgba(201,151,58,.2); }
+  .drink-name { font-family: 'Playfair Display', serif; font-size: 15px; color: var(--cream); margin-bottom: 6px; }
+  .drink-price { font-size: 17px; font-weight: 600; color: var(--gold2); }
+  .drink-type { font-size: 11px; color: var(--muted); margin-bottom: 10px; letter-spacing: 1px; }
+
+  /* EVENT / BUFFET */
+  .event-section { background: var(--bg); }
+  .event-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 60px; }
+  .event-card {
+    border: 1px solid rgba(201,151,58,.2);
+    border-radius: 4px;
+    overflow: hidden;
+    transition: all .4s;
+    position: relative;
+  }
+  .event-card:hover { transform: translateY(-8px); border-color: rgba(201,151,58,.5); box-shadow: 0 30px 60px rgba(0,0,0,.4); }
+  .event-card.featured {
+    border-color: var(--gold);
+    box-shadow: 0 0 40px rgba(201,151,58,.15);
+  }
+  .event-badge {
+    position: absolute; top: 20px; right: 20px;
+    background: var(--gold); color: var(--bg);
+    font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+    padding: 5px 12px; border-radius: 2px; font-weight: 600;
+  }
+  .event-header {
+    padding: 36px 30px 28px;
+    border-bottom: 1px solid rgba(255,255,255,.07);
+  }
+  .event-flower { font-size: 36px; margin-bottom: 16px; display: block; }
+  .event-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px; font-weight: 700;
+    color: var(--cream); margin-bottom: 6px;
+  }
+  .event-tier { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); }
+  .event-price {
+    font-family: 'Playfair Display', serif;
+    font-size: 42px; font-weight: 900;
+    color: var(--gold2); line-height: 1;
+    margin-top: 20px;
+  }
+  .event-price small { font-size: 14px; font-family: 'Outfit', sans-serif; color: var(--muted); font-weight: 400; }
+  .event-body { padding: 28px 30px; }
+  .event-includes { font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 18px; }
+  .event-perks { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .event-perks li {
+    display: flex; align-items: flex-start; gap: 12px;
+    font-size: 14px; color: var(--cream2);
+  }
+  .event-perks li::before { content: '✦'; color: var(--gold); font-size: 10px; margin-top: 3px; flex-shrink: 0; }
+  .event-cta {
+    display: block;
+    margin: 24px 30px 30px;
+    background: var(--terra);
+    color: #fff;
+    text-align: center;
+    padding: 14px;
+    font-size: 12px; letter-spacing: 2px; text-transform: uppercase;
+    text-decoration: none; border-radius: 3px;
+    transition: all .3s;
+    border: 2px solid var(--terra);
+  }
+  .event-card.featured .event-cta { background: var(--gold); border-color: var(--gold); color: var(--bg); font-weight: 600; }
+  .event-cta:hover { background: transparent; color: var(--terra); }
+  .event-card.featured .event-cta:hover { background: transparent; color: var(--gold); }
+
+  /* FASILITAS */
+  .facilities {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px;
+    margin-top: 60px;
+  }
+  .facility-card {
+    padding: 36px 28px;
+    background: rgba(255,255,255,.03);
+    border: 1px solid rgba(255,255,255,.06);
+    text-align: center;
+    transition: all .3s;
+  }
+  .facility-card:hover { background: rgba(201,151,58,.05); border-color: rgba(201,151,58,.2); }
+  .facility-icon { font-size: 36px; margin-bottom: 16px; display: block; }
+  .facility-name { font-family: 'Playfair Display', serif; font-size: 18px; color: var(--cream); margin-bottom: 8px; }
+  .facility-desc { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+  /* LOCATIONS */
+  .locations-section { background: var(--bg2); }
+  .loc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; margin-top: 60px; }
+  .loc-card {
+    position: relative; overflow: hidden;
+    background: rgba(255,255,255,.03);
+    border: 1px solid rgba(255,255,255,.08);
+    transition: all .4s;
+  }
+  .loc-card:hover { border-color: rgba(201,151,58,.3); }
+  .loc-map {
+    height: 260px; overflow: hidden;
+  }
+  .loc-map iframe { width: 100%; height: 100%; border: 0; filter: grayscale(.7) invert(.08); }
+  .loc-body { padding: 32px 34px 36px; }
+  .loc-branch {
+    font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--terra); margin-bottom: 14px;
+  }
+  .loc-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px; font-weight: 700;
+    color: var(--cream); margin-bottom: 12px; line-height: 1.3;
+  }
+  .loc-address {
+    font-size: 14px; color: var(--cream2); line-height: 1.7; margin-bottom: 24px;
+  }
+  .loc-contacts { display: flex; flex-direction: column; gap: 10px; }
+  .loc-contact {
+    display: flex; align-items: center; gap: 12px;
+    font-size: 13px; color: var(--cream2);
+  }
+  .loc-contact span.icon { color: var(--gold); font-size: 16px; }
+  .loc-btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    margin-top: 24px;
+    border: 1px solid rgba(201,151,58,.3);
+    color: var(--gold);
+    padding: 12px 22px;
+    font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase;
+    text-decoration: none; border-radius: 3px;
+    transition: all .3s;
+  }
+  .loc-btn:hover { background: rgba(201,151,58,.1); border-color: var(--gold); }
+
+  /* TESTIMONIALS */
+  .testi-section { background: var(--bg); }
+  .testi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 60px; }
+  .testi-card {
+    background: rgba(255,255,255,.03);
+    border: 1px solid rgba(255,255,255,.07);
+    padding: 32px 28px;
+    border-radius: 4px;
+    transition: all .3s;
+  }
+  .testi-card:hover { border-color: rgba(201,151,58,.2); transform: translateY(-4px); }
+  .testi-stars { color: var(--gold2); font-size: 14px; letter-spacing: 2px; margin-bottom: 18px; }
+  .testi-quote {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px; font-style: italic;
+    color: var(--cream); line-height: 1.8; margin-bottom: 24px;
+  }
+  .testi-quote::before { content: '"'; font-size: 40px; color: var(--terra); line-height: 0; vertical-align: -14px; margin-right: 4px; }
+  .testi-author { display: flex; align-items: center; gap: 14px; }
+  .testi-avatar {
+    width: 44px; height: 44px; border-radius: 50%;
+    background: var(--terra); display: flex; align-items: center; justify-content: center;
+    font-family: 'Playfair Display', serif; font-size: 18px; color: #fff;
+    flex-shrink: 0;
+  }
+  .testi-name { font-size: 14px; font-weight: 600; color: var(--cream); }
+  .testi-via { font-size: 12px; color: var(--muted); }
+
+  /* CTA SECTION */
+  .cta-section {
+    background: linear-gradient(135deg, #1c0e06 0%, #0f1a0f 100%);
+    padding: 100px 60px;
+    text-align: center;
+    border-top: 1px solid rgba(201,151,58,.15);
+    position: relative; overflow: hidden;
+  }
+  .cta-section::before {
+    content: 'SUDUT KEDAI';
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    font-family: 'Playfair Display', serif;
+    font-size: 180px; font-weight: 900;
+    color: rgba(255,255,255,.02);
+    white-space: nowrap; pointer-events: none;
+  }
+  .cta-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(36px, 5vw, 64px);
+    color: var(--cream); line-height: 1.15;
+    margin-bottom: 18px; position: relative;
+  }
+  .cta-title em { color: var(--gold2); font-style: italic; }
+  .cta-sub { font-size: 16px; color: var(--muted); margin-bottom: 44px; max-width: 500px; margin-left: auto; margin-right: auto; }
+  .cta-actions { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+  .btn-wa {
+    background: #25D366; color: #fff;
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 16px 36px;
+    font-size: 13px; letter-spacing: 2px; text-transform: uppercase;
+    text-decoration: none; border-radius: 3px;
+    transition: all .3s; font-family: 'Outfit', sans-serif;
+    border: 2px solid #25D366;
+  }
+  .btn-wa:hover { background: transparent; color: #25D366; }
+
+  /* FOOTER */
+  footer {
+    background: #0a0604;
+    padding: 60px 60px 30px;
+    border-top: 1px solid rgba(255,255,255,.06);
+  }
+  .footer-grid {
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 60px; margin-bottom: 48px;
+  }
+  .footer-brand-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px; font-weight: 700;
+    color: var(--gold2); margin-bottom: 6px;
+  }
+  .footer-brand-sub { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 18px; }
+  .footer-brand-desc { font-size: 13px; color: var(--muted); line-height: 1.8; max-width: 280px; }
+  .footer-socials { display: flex; gap: 12px; margin-top: 24px; }
+  .footer-social {
+    width: 38px; height: 38px;
+    border: 1px solid rgba(255,255,255,.1);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--muted); text-decoration: none; font-size: 14px;
+    transition: all .3s;
+  }
+  .footer-social:hover { border-color: var(--gold); color: var(--gold); }
+  .footer-col-title {
+    font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 20px;
+  }
+  .footer-links { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+  .footer-links a {
+    color: var(--muted); text-decoration: none; font-size: 13px;
+    transition: color .3s;
+  }
+  .footer-links a:hover { color: var(--cream); }
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,.06);
+    padding-top: 24px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .footer-copy { font-size: 12px; color: var(--muted); }
+  .footer-insta { font-size: 12px; color: var(--terra); text-decoration: none; }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .reveal {
+    opacity: 0; transform: translateY(30px);
+    transition: opacity .7s ease, transform .7s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* MOBILE */
+  @media (max-width: 768px) {
+    nav { padding: 18px 24px; }
+    nav.scrolled { padding: 14px 24px; }
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    .hero { grid-template-columns: 1fr; min-height: auto; }
+    .hero-left { padding: 100px 24px 60px; }
+    .hero-right { height: 320px; }
+    .hero-float-card { display: none; }
+    .hero-stats { gap: 24px; flex-wrap: wrap; }
+    .section { padding: 70px 24px; }
+    .dual-brand { grid-template-columns: 1fr; gap: 2px; }
+    .menu-tabs { flex-wrap: wrap; width: 100%; }
+    .event-grid { grid-template-columns: 1fr; }
+    .facilities { grid-template-columns: 1fr 1fr; }
+    .loc-grid { grid-template-columns: 1fr; }
+    .testi-grid { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 36px; }
+    .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+    .cta-section { padding: 70px 24px; }
+    .cta-section::before { font-size: 80px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- CURSOR -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <div class="nav-logo">
+    <span>Sudut Kedai × Waroeng Soeroboyo</span>
+    <span>Cileungsi · Cibubur</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#tentang">Tentang</a></li>
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#event">Event</a></li>
+    <li><a href="#lokasi">Lokasi</a></li>
+    <li><a href="https://wa.me/6289532719664" class="nav-cta">Reservasi</a></li>
+  </ul>
+  <div class="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-left">
+    <div class="hero-badge">Kawasan Cileungsi · Bogor</div>
+    <h1 class="hero-title">
+      Sudut <span class="accent">Kedai</span> ×<br>
+      <span class="red">Waroeng</span><br>
+      Soeroboyo
+    </h1>
+    <p class="hero-subtitle">Lawas & Modern, Dalam Satu Sudut</p>
+    <p class="hero-desc">
+      Tempat nongkrong aesthetic yang memadukan cita rasa otentik Jawa Timur dengan suasana kafe modern yang cozy. Live music, meeting room, dan menu yang bikin nagih.
+    </p>
+    <div class="hero-actions">
+      <a href="#menu" class="btn-primary">Lihat Menu</a>
+      <a href="#event" class="btn-secondary">Paket Event</a>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <strong>2</strong>
+        <span>Cabang Aktif</span>
+      </div>
+      <div class="hero-stat">
+        <strong>100+</strong>
+        <span>Kapasitas Acara</span>
+      </div>
+      <div class="hero-stat">
+        <strong>50+</strong>
+        <span>Pilihan Menu</span>
+      </div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-img-wrap"></div>
+    <div class="hero-float-card">
+      <div class="label">Andalan Kami</div>
+      <div class="dish">Nasi Ayam Bakar Kecombrang</div>
+      <div class="price">Rp 34.500</div>
+      <div class="badge-tag">⭐ Paling Favorit</div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-band">
+  <div class="marquee-track">
+    <span>Sudut Kedai <span class="dot">●</span></span>
+    <span>Waroeng Soeroboyo Lawas <span class="dot">●</span></span>
+    <span>Live Music Setiap Malam <span class="dot">●</span></span>
+    <span>Meeting Room 100 Pax <span class="dot">●</span></span>
+    <span>Nasi Rawon Otentik <span class="dot">●</span></span>
+    <span>Kopi Beneran yang Beneran Enak <span class="dot">●</span></span>
+    <span>Instagramable & Cozy <span class="dot">●</span></span>
+    <span>Metland & Citraland Cibubur <span class="dot">●</span></span>
+    <!-- duplicate -->
+    <span>Sudut Kedai <span class="dot">●</span></span>
+    <span>Waroeng Soeroboyo Lawas <span class="dot">●</span></span>
+    <span>Live Music Setiap Malam <span class="dot">●</span></span>
+    <span>Meeting Room 100 Pax <span class="dot">●</span></span>
+    <span>Nasi Rawon Otentik <span class="dot">●</span></span>
+    <span>Kopi Beneran yang Beneran Enak <span class="dot">●</span></span>
+    <span>Instagramable & Cozy <span class="dot">●</span></span>
+    <span>Metland & Citraland Cibubur <span class="dot">●</span></span>
+  </div>
+</div>
+
+<!-- TENTANG -->
+<section class="section" id="tentang">
+  <div class="section-label reveal">Tentang Kami</div>
+  <h2 class="section-title reveal">Dua Dunia,<br>Satu <em style="font-style:italic;color:var(--gold)">Tempat</em></h2>
+  <p class="section-desc reveal">
+    Kami hadir sebagai ruang ketiga yang merangkul dua identitas kuliner sekaligus — modernitas kafe masa kini dan kekayaan warisan masakan Jawa Timur yang tak lekang waktu.
+  </p>
+
+  <div class="dual-brand">
+    <div class="brand-card modern reveal">
+      <div class="brand-icon">☕</div>
+      <h3 class="brand-name">Sudut Kedai</h3>
+      <p class="brand-tagline">The Modern Café Wing</p>
+      <p class="brand-desc">
+        Spot nongkrong modern dengan menu kopi specialty, makanan kekinian, dan suasana yang Instagramable. Cocok untuk anak muda, work-from-cafe, hingga gathering santai.
+        <br><br>
+        <strong style="color:var(--cream)">IG: @sudutkedai_</strong>
+      </p>
+    </div>
+    <div class="brand-card traditional reveal">
+      <div class="brand-icon">🍲</div>
+      <h3 class="brand-name">Waroeng Soeroboyo Lawas</h3>
+      <p class="brand-tagline">The Heritage Kitchen</p>
+      <p class="brand-desc">
+        Menyuguhkan masakan Jawa Timur otentik yang kaya rasa — dari Rawon, Lontong Cap Gomeh, hingga Rujak Cingur. Dibuat dengan resep lawas yang terjaga turun-temurun.
+        <br><br>
+        <strong style="color:var(--cream)">IG: @waroenglawass</strong>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- FACILITIES -->
+<section class="section" style="background:var(--bg2); padding-top:0">
+  <div class="facilities reveal">
+    <div class="facility-card">
+      <span class="facility-icon">🎵</span>
+      <div class="facility-name">Live Music</div>
+      <p class="facility-desc">Hiburan live music setiap malam untuk menemani momen santai kamu</p>
+    </div>
+    <div class="facility-card">
+      <span class="facility-icon">🏛️</span>
+      <div class="facility-name">Meeting Room</div>
+      <p class="facility-desc">Ruang meeting berkapasitas hingga 100 orang, siap untuk segala acara</p>
+    </div>
+    <div class="facility-card">
+      <span class="facility-icon">📸</span>
+      <div class="facility-name">Instagramable</div>
+      <p class="facility-desc">Desain interior yang aesthetic, sempurna untuk konten media sosial</p>
+    </div>
+    <div class="facility-card">
+      <span class="facility-icon">🚗</span>
+      <div class="facility-name">Parkir Luas</div>
+      <p class="facility-desc">Area parkir yang cukup untuk kunjungan rombongan maupun keluarga</p>
+    </div>
+  </div>
+</section>
+
+<!-- MENU -->
+<section class="section menu-section" id="menu">
+  <div class="section-label reveal">Pilihan Menu</div>
+  <h2 class="section-title reveal">Dari Kopi Hingga<br><em style="font-style:italic;color:var(--gold)">Rawon Otentik</em></h2>
+  <p class="section-desc reveal" style="margin-bottom:50px">Dua karakter menu dalam satu tempat. Pilih sesuai mood-mu hari ini.</p>
+
+  <div class="menu-tabs reveal">
+    <button class="menu-tab active" onclick="switchTab('tematik')">☕ Sudut Kedai</button>
+    <button class="menu-tab" onclick="switchTab('cultural')">🍲 Waroeng Soeroboyo</button>
+    <button class="menu-tab" onclick="switchTab('snacks')">🍌 Camilan & Dessert</button>
+  </div>
+
+  <!-- TEMATIK -->
+  <div class="menu-panel active" id="tab-tematik">
+    <div class="menu-categories">
+      <div>
+        <div class="menu-category-title">Minuman Kopi</div>
+        <div class="menu-scroll-row">
+          <div class="menu-drink-card"><div class="drink-name">Kopi Beneran</div><div class="drink-type">Signature</div><div class="drink-price">Rp 27.000</div></div>
+          <div class="menu-drink-card"><div class="drink-name">Mexico Coffee</div><div class="drink-type">Coffee</div><div class="drink-price">Rp 27.000</div></div>
+          <div class="menu-drink-card"><div class="drink-name">Caramel Machiato</div><div class="drink-type">Coffee</div><div class="drink-price">Rp 28.000</div></div>
+          <div class="menu-drink-card"><div class="drink-name">Coffee Latte</div><div class="drink-type">Coffee</div><div class="drink-price">Rp 26.000</div></div>
+          <div class="menu-drink-card"><div class="drink-name">Cappucino</div><div class="drink-type">Coffee</div><div class="drink-price">Rp 27.000</div></div>
+          <div class="menu-drink-card"><div class="drink-name">Brown Sugar Latte</div><div class="drink-type">Coffee</div><div class="drink-price">Rp 27.000</div></div>
+          <div class="menu-drink-card"><div class="drink-name">Salt N Caramel Coffee</div><div class="drink-type">Coffee</div><div class="drink-price">Rp 29.000</div></div>
+          <div class="menu-drink-card"><div class="drink-name">Avocado Coffee</div><div class="drink-type">Coffee</div><div class="drink-price">Rp 27.000</div></div>
+          <div class="menu-drink-card"><div class="drink-name">Black Coffee</div><div class="drink-type">Coffee</div><div class="drink-price">Rp 18.000</div></div>
+        </div>
+      </div>
+      <div>
+        <div class="menu-category-title">Non-Coffee</div>
+        <div class="menu-scroll-row">
+          <div class="menu-drink-card"><div class="drink-name">Avocado Chocolate</div><div class="drink-type">Non-Coffee</div><div class="drink-price">Rp 27.000</div></div>
+          <div class="menu-drink-card"><div class="drink-name">Lychee Tea</div><div class="drink-type">Non-Coffee</div><div class="drink-price">Rp 27.000</div></div>
+          <div class="menu-drink-card"><div class="drink-name">Creamy Matcha</div><div class="drink-type">Non-Coffee</div><div class="drink-price">Rp 26.000</div></div>
+          <div class="menu-drink-card"><div class="drink-name">Lemon Squash</div><div class="drink-type">Non-Coffee</div><div class="drink-price">Rp 26.000</div></div>
+          <div class="menu-drink-card"><div class="drink-name">Dark Chocolate</div><div class="drink-type">Non-Coffee</div><div class="drink-price">Rp 27.000</div></div>
+          <div class="menu-drink-card"><div class="drink-name">Cookies N Cream</div><div class="drink-type">Non-Coffee</div><div class="drink-price">Rp 26.000</div></div>
+          <div class="menu-drink-card"><div class="drink-name">Fruit Shake Mangga</div><div class="drink-type">Non-Coffee</div><div class="drink-price">Rp 24.000</div></div>
+          <div class="menu-drink-card"><div class="drink-name">Teh Tarik</div><div class="drink-type">Non-Coffee</div><div class="drink-price">Rp 23.000</div></div>
+        </div>
+      </div>
+      <div>
+        <div class="menu-category-title">Makanan</div>
+        <div class="menu-grid">
+          <div class="menu-item"><div class="menu-item-name">Nasi Goreng Original</div><div class="menu-item-sub">Tematik Sudut Kedai</div><div class="menu-item-footer"><span class="menu-item-price">Rp 29.000</span><span class="menu-item-tag tag-hits">Hits</span></div></div>
+          <div class="menu-item"><div class="menu-item-name">Nasi Goreng Teri</div><div class="menu-item-sub">Tematik Sudut Kedai</div><div class="menu-item-footer"><span class="menu-item-price">Rp 30.000</span></div></div>
+          <div class="menu-item"><div class="menu-item-name">Nasi Goreng Gila</div><div class="menu-item-sub">Tematik Sudut Kedai</div><div class="menu-item-footer"><span class="menu-item-price">Rp 31.000</span><span class="menu-item-tag tag-andalan">Andalan</span></div></div>
+          <div class="menu-item"><div class="menu-item-name">Nasi Gila</div><div class="menu-item-sub">Tematik Sudut Kedai</div><div class="menu-item-footer"><span class="menu-item-price">Rp 31.000</span></div></div>
+          <div class="menu-item"><div class="menu-item-name">Spagheti Bolognese</div><div class="menu-item-sub">Western Fusion</div><div class="menu-item-footer"><span class="menu-item-price">Rp 29.000</span></div></div>
+          <div class="menu-item"><div class="menu-item-name">Spagheti Spicy</div><div class="menu-item-sub">Western Fusion</div><div class="menu-item-footer"><span class="menu-item-price">Rp 29.000</span></div></div>
+          <div class="menu-item"><div class="menu-item-name">Indomie Rebus Ngegas</div><div class="menu-item-sub">Level pedas tersedia</div><div class="menu-item-footer"><span class="menu-item-price">Rp 29.000</span><span class="menu-item-tag tag-hits">Hits</span></div></div>
+          <div class="menu-item"><div class="menu-item-name">Indomie Goreng Sambal Matah</div><div class="menu-item-sub">Bali-style sambal</div><div class="menu-item-footer"><span class="menu-item-price">Rp 27.000</span></div></div>
+          <div class="menu-item"><div class="menu-item-name">Mie Goreng Jawa</div><div class="menu-item-sub">Resep Jawa Klasik</div><div class="menu-item-footer"><span class="menu-item-price">Rp 29.000</span></div></div>
+          <div class="menu-item"><div class="menu-item-name">Cuanki</div><div class="menu-item-sub">Bandung Street Style</div><div class="menu-item-footer"><span class="menu-item-price">Rp 29.000</span></div></div>
+          <div class="menu-item"><div class="menu-item-name">Mix Platter</div><div class="menu-item-sub">Berbagi bareng</div><div class="menu-item-footer"><span class="menu-item-price">Rp 31.000</span><span class="menu-item-tag tag-andalan">Andalan</span></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CULTURAL -->
+  <div class="menu-panel" id="tab-cultural">
+    <div class="menu-categories">
+      <div>
+        <div class="menu-category-title">Menu Utama — Waroeng Soeroboyo Lawas</div>
+        <div class="menu-grid">
+          <div class="menu-item"><div class="menu-item-name">Nasi Ayam Bakar Kecombrang</div><div class="menu-item-sub">Signature Waroeng</div><div class="menu-item-footer"><span class="menu-item-price">Rp 34.500</span><span class="menu-item-tag tag-andalan">⭐ Andalan</span></div></div>
+          <div class="menu-item"><div class="menu-item-name">Nasi Rawon</div><div class="menu-item-sub">Sup daging hitam Jawa Timur</div><div class="menu-item-footer"><span class="menu-item-price">Rp 39.500</span><span class="menu-item-tag tag-hits">Hits</span></div></div>
+          <div class="menu-item"><div class="menu-item-name">Soto Ayam Kampung Soeroboyo</div><div class="menu-item-sub">Kuah bening khas Surabaya</div><div class="menu-item-footer"><span class="menu-item-price">Rp 34.500</span><span class="menu-item-tag tag-andalan">Andalan</span></div></div>
+          <div class="menu-item"><div class="menu-item-name">Lontong Cap Gomeh</div><div class="menu-item-sub">Hidangan spesial perayaan</div><div class="menu-item-footer"><span class="menu-item-price">Rp 39.500</span></div></div>
+          <div class="menu-item"><div class="menu-item-name">Penyetan Iwak Pe</div><div class="menu-item-sub">Ikan pe goreng + sambal</div><div class="menu-item-footer"><span class="menu-item-price">Rp 33.500</span></div></div>
+          <div class="menu-item"><div class="menu-item-name">Nasi Jangan Lodeh</div><div class="menu-item-sub">Sayur lodeh khas Jawa</div><div class="menu-item-footer"><span class="menu-item-price">Rp 33.500</span></div></div>
+          <div class="menu-item"><div class="menu-item-name">Lontong Balap</div><div class="menu-item-sub">Street food legendaris Surabaya</div><div class="menu-item-footer"><span class="menu-item-price">Rp 33.500</span><span class="menu-item-tag tag-hits">Hits</span></div></div>
+          <div class="menu-item"><div class="menu-item-name">Nasi Goreng Kampung</div><div class="menu-item-sub">Resep kampung autentik</div><div class="menu-item-footer"><span class="menu-item-price">Rp 33.000</span></div></div>
+          <div class="menu-item"><div class="menu-item-name">Tahu Tek-Tek</div><div class="menu-item-sub">Tahu + lontong + petis</div><div class="menu-item-footer"><span class="menu-item-price">Rp 32.500</span></div></div>
+          <div class="menu-item"><div class="menu-item-name">Rujak Cingur</div><div class="menu-item-sub">Kuliner ikonik Surabaya</div><div class="menu-item-footer"><span class="menu-item-price">Rp 33.500</span><span class="menu-item-tag tag-andalan">Andalan</span></div></div>
+          <div class="menu-item"><div class="menu-item-name">Ayam Tepung Sambal Ijo</div><div class="menu-item-sub">Crispy + sambal ijo pedas</div><div class="menu-item-footer"><span class="menu-item-price">Rp 34.500</span></div></div>
+          <div class="menu-item"><div class="menu-item-name">Mie Goreng Kampung</div><div class="menu-item-sub">Mie goreng resep lawas</div><div class="menu-item-footer"><span class="menu-item-price">Rp 33.000</span></div></div>
+          <div class="menu-item"><div class="menu-item-name">Gado Gado</div><div class="menu-item-sub">Sayuran segar + bumbu kacang</div><div class="menu-item-footer"><span class="menu-item-price">Rp 33.500</span></div></div>
+          <div class="menu-item"><div class="menu-item-name">Ketan Sambal</div><div class="menu-item-sub">Camilan tradisional</div><div class="menu-item-footer"><span class="menu-item-price">Rp 23.500</span></div></div>
+        </div>
+      </div>
+      <div>
+        <div class="menu-category-title">Minuman Tradisional</div>
+        <div class="menu-scroll-row">
+          <div class="menu-drink-card"><div class="drink-name">Es Dawet</div><div class="drink-type">Tradisional</div><div class="drink-price">Rp 18.000</div></div>
+          <div class="menu-drink-card"><div class="drink-name">Es Asem Jawa</div><div class="drink-type">Tradisional</div><div class="drink-price">Rp 23.000</div></div>
+          <div class="menu-drink-card"><div class="drink-name">Jahe Tubruk</div><div class="drink-type">Herbal</div><div class="drink-price">Rp 22.000</div></div>
+          <div class="menu-drink-card"><div class="drink-name">Teh Jasmine Sereh</div><div class="drink-type">Herbal</div><div class="drink-price">Rp 18.000</div></div>
+          <div class="menu-drink-card"><div class="drink-name">Jamu Kunyit Asam</div><div class="drink-type">Jamu</div><div class="drink-price">Rp 7.000</div></div>
+          <div class="menu-drink-card"><div class="drink-name">Jamu Beras Kencur</div><div class="drink-type">Jamu</div><div class="drink-price">Rp 7.000</div></div>
+          <div class="menu-drink-card"><div class="drink-name">Jus Buah</div><div class="drink-type">Segar</div><div class="drink-price">Rp 21.000</div></div>
+          <div class="menu-drink-card"><div class="drink-name">Es Jeruk</div><div class="drink-type">Segar</div><div class="drink-price">Rp 21.000</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SNACKS -->
+  <div class="menu-panel" id="tab-snacks">
+    <div class="menu-categories">
+      <div>
+        <div class="menu-category-title">Gorengan & Camilan</div>
+        <div class="menu-grid">
+          <div class="menu-item"><div class="menu-item-name">Tempe Mendoan</div><div class="menu-item-sub">Tempe tepung tipis khas Jawa</div><div class="menu-item-footer"><span class="menu-item-price">Rp 19.000</span><span class="menu-item-tag tag-hits">Hits</span></div></div>
+          <div class="menu-item"><div class="menu-item-name">Tahu Petis</div><div class="menu-item-sub">Tahu + petis udang</div><div class="menu-item-footer"><span class="menu-item-price">Rp 17.000</span></div></div>
+          <div class="menu-item"><div class="menu-item-name">Bakwan Jagung</div><div class="menu-item-sub">Crispy corn fritter</div><div class="menu-item-footer"><span class="menu-item-price">Rp 16.000</span></div></div>
+          <div class="menu-item"><div class="menu-item-name">Singkong Nagih</div><div class="menu-item-sub">Keju + topping</div><div class="menu-item-footer"><span class="menu-item-price">Rp 17.000</span><span class="menu-item-tag tag-andalan">Andalan</span></div></div>
+          <div class="menu-item"><div class="menu-item-name">Tahu Nagih</div><div class="menu-item-sub">Tahu goreng khas kedai</div><div class="menu-item-footer"><span class="menu-item-price">Rp 22.000</span></div></div>
+          <div class="menu-item"><div class="menu-item-name">Onion Ring</div><div class="menu-item-sub">Crispy bawang</div><div class="menu-item-footer"><span class="menu-item-price">Rp 26.000</span></div></div>
+          <div class="menu-item"><div class="menu-item-name">Dimsum</div><div class="menu-item-sub">Pilihan dim sum</div><div class="menu-item-footer"><span class="menu-item-price">Rp 25.000</span></div></div>
+          <div class="menu-item"><div class="menu-item-name">Rujak Cireng</div><div class="menu-item-sub">Cireng + bumbu rujak</div><div class="menu-item-footer"><span class="menu-item-price">Rp 23.000</span></div></div>
+          <div class="menu-item"><div class="menu-item-name">Risol Rhogut</div><div class="menu-item-sub">Risoles kreatif khas kedai</div><div class="menu-item-footer"><span class="menu-item-price">Rp 22.000</span></div></div>
+        </div>
+      </div>
+      <div>
+        <div class="menu-category-title">Dessert & Roti Bakar</div>
+        <div class="menu-grid">
+          <div class="menu-item"><div class="menu-item-name">Roti Bakar Keju Coklat</div><div class="menu-item-sub">Pilihan: Keju / Coklat / Strawberry</div><div class="menu-item-footer"><span class="menu-item-price">Rp 22.000</span><span class="menu-item-tag tag-hits">Hits</span></div></div>
+          <div class="menu-item"><div class="menu-item-name">Roti Bakar Tiramisu Oreo</div><div class="menu-item-sub">Topping premium</div><div class="menu-item-footer"><span class="menu-item-price">Rp 25.000</span><span class="menu-item-tag tag-new">New</span></div></div>
+          <div class="menu-item"><div class="menu-item-name">Pisang Bakar Coklat Keju</div><div class="menu-item-sub">Klasik yang tak tergantikan</div><div class="menu-item-footer"><span class="menu-item-price">Rp 23.000</span></div></div>
+          <div class="menu-item"><div class="menu-item-name">Pisang Bakar Brown Sugar</div><div class="menu-item-sub">Manis karamel</div><div class="menu-item-footer"><span class="menu-item-price">Rp 23.000</span></div></div>
+          <div class="menu-item"><div class="menu-item-name">Pisang Goreng Keju</div><div class="menu-item-sub">Golden & melty</div><div class="menu-item-footer"><span class="menu-item-price">Rp 23.000</span></div></div>
+          <div class="menu-item"><div class="menu-item-name">Marmer Cake Slice</div><div class="menu-item-sub">Kue per slice</div><div class="menu-item-footer"><span class="menu-item-price">Rp 18.000</span></div></div>
+          <div class="menu-item"><div class="menu-item-name">Molen Salju</div><div class="menu-item-sub">Molen gula halus</div><div class="menu-item-footer"><span class="menu-item-price">Rp 21.000</span></div></div>
+          <div class="menu-item"><div class="menu-item-name">Kue Talam Ketan</div><div class="menu-item-sub">Kue tradisional</div><div class="menu-item-footer"><span class="menu-item-price">Rp 6.000</span></div></div>
+          <div class="menu-item"><div class="menu-item-name">Gethuk</div><div class="menu-item-sub">Singkong manis tradisional</div><div class="menu-item-footer"><span class="menu-item-price">Rp 6.000</span></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EVENT / BUFFET -->
+<section class="section event-section" id="event">
+  <div class="section-label reveal">Social Event</div>
+  <h2 class="section-title reveal">Paket Buffet<br><em style="font-style:italic;color:var(--gold)">Sudut Lawas</em></h2>
+  <p class="section-desc reveal">Cocok untuk birthday, arisan, reuni, engagement, hingga gathering kantor. Tersedia di semua cabang.</p>
+
+  <div class="event-grid">
+    <!-- LILIUM -->
+    <div class="event-card reveal">
+      <div class="event-header">
+        <span class="event-flower">🌸</span>
+        <div class="event-name">Lilium</div>
+        <div class="event-tier">Paket Hemat</div>
+        <div class="event-price">Rp 90.000 <small>/pax</small></div>
+      </div>
+      <div class="event-body">
+        <div class="event-includes">Sudah termasuk:</div>
+        <ul class="event-perks">
+          <li>2 Appetizer pilihan (Cuanki & Ayam Kecombrang)</li>
+          <li>2 Pilihan Nasi</li>
+          <li>2 Pilihan Minuman</li>
+          <li>Cocok untuk gathering kasual</li>
+        </ul>
+      </div>
+      <a href="https://wa.me/6289532719664?text=Halo%2C%20saya%20mau%20tanya%20Paket%20Lilium" class="event-cta" target="_blank">Pesan Sekarang</a>
+    </div>
+    <!-- MELATI -->
+    <div class="event-card featured reveal">
+      <div class="event-badge">Terpopuler</div>
+      <div class="event-header">
+        <span class="event-flower">🌺</span>
+        <div class="event-name">Melati</div>
+        <div class="event-tier">Paket Standar</div>
+        <div class="event-price">Rp 105.000 <small>/pax</small></div>
+      </div>
+      <div class="event-body">
+        <div class="event-includes">Sudah termasuk:</div>
+        <ul class="event-perks">
+          <li>2 Appetizer pilihan</li>
+          <li>Rawon + Mie Goreng Jawa</li>
+          <li>2 Pilihan Nasi</li>
+          <li>2 Pilihan Minuman</li>
+        </ul>
+      </div>
+      <a href="https://wa.me/6289532719664?text=Halo%2C%20saya%20mau%20tanya%20Paket%20Melati" class="event-cta" target="_blank">Pesan Sekarang</a>
+    </div>
+    <!-- ANGGREK -->
+    <div class="event-card reveal">
+      <div class="event-header">
+        <span class="event-flower">🌷</span>
+        <div class="event-name">Anggrek</div>
+        <div class="event-tier">Paket Premium</div>
+        <div class="event-price">Rp 125.000 <small>/pax</small></div>
+      </div>
+      <div class="event-body">
+        <div class="event-includes">Sudah termasuk:</div>
+        <ul class="event-perks">
+          <li>2 Appetizer pilihan</li>
+          <li>Rawon atau Ayam Kecombrang (pilih 1)</li>
+          <li>Lontong Cap Gomeh (sudah termasuk)</li>
+          <li>2 Pilihan Nasi + 2 Minuman</li>
+        </ul>
+      </div>
+      <a href="https://wa.me/6289532719664?text=Halo%2C%20saya%20mau%20tanya%20Paket%20Anggrek" class="event-cta" target="_blank">Pesan Sekarang</a>
+    </div>
+  </div>
+
+  <div style="margin-top:40px;padding:24px 32px;background:rgba(201,151,58,.08);border:1px solid rgba(201,151,58,.2);border-radius:4px;display:flex;align-items:center;gap:20px;" class="reveal">
+    <span style="font-size:28px">📋</span>
+    <div>
+      <div style="font-size:13px;font-weight:600;color:var(--cream);margin-bottom:4px">Pilihan Appetizer yang Tersedia</div>
+      <div style="font-size:13px;color:var(--muted)">Gethuk · Risol Rhogut · Cireng · Kue Talam Pandan · Tempe Mendoan · Bakwan</div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section testi-section">
+  <div class="section-label reveal">Yang Mereka Bilang</div>
+  <h2 class="section-title reveal">Cerita dari<br><em style="font-style:italic;color:var(--gold)">Tamu Kami</em></h2>
+
+  <div class="testi-grid">
+    <div class="testi-card reveal">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-quote">Tempatnya cozy banget, cocok buat nongkrong sambil kerja atau ketemu klien. Kopi Beneran-nya beneran enak!</p>
+      <div class="testi-author">
+        <div class="testi-avatar">R</div>
+        <div><div class="testi-name">Rizky A.</div><div class="testi-via">via Google Review</div></div>
+      </div>
+    </div>
+    <div class="testi-card reveal">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-quote">Rawon di sini asli enak banget, beda dari yang lain. Daging empuk, kuah hitamnya kaya rasa. Langsung jadi favorit keluarga!</p>
+      <div class="testi-author">
+        <div class="testi-avatar">S</div>
+        <div><div class="testi-name">Sari W.</div><div class="testi-via">via Instagram</div></div>
+      </div>
+    </div>
+    <div class="testi-card reveal">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-quote">Udah 3x booking meeting room di sini. Kapasitas 100 orang cukup, fasilitas oke, dan cateringnya selalu memuaskan tamu-tamu kami.</p>
+      <div class="testi-author">
+        <div class="testi-avatar">B</div>
+        <div><div class="testi-name">Budi H.</div><div class="testi-via">Event Organizer</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOKASI -->
+<section class="section locations-section" id="lokasi">
+  <div class="section-label reveal">Temukan Kami</div>
+  <h2 class="section-title reveal">Dua Cabang,<br><em style="font-style:italic;color:var(--gold)">Satu Rasa</em></h2>
+
+  <div class="loc-grid">
+    <!-- METLAND -->
+    <div class="loc-card reveal">
+      <div class="loc-map">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3964.9!2d106.975!3d-6.385!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNsKwMjMnMDYuMCJTIDEwNsKwNTgnMzAuMCJF!5e0!3m2!1sid!2sid!4v1" loading="lazy" allowfullscreen></iframe>
+      </div>
+      <div class="loc-body">
+        <div class="loc-branch">Cabang Utama</div>
+        <div class="loc-name">Metland Transyogi</div>
+        <div class="loc-address">Ruko Eboni VII No. 57-61<br>Jl. Metland Transyogi, Cileungsi<br>Bogor, Jawa Barat</div>
+        <div class="loc-contacts">
+          <div class="loc-contact"><span class="icon">📞</span><span>0895-3271-96647</span></div>
+          <div class="loc-contact"><span class="icon">📱</span><span>0821-2875-5505</span></div>
+          <div class="loc-contact"><span class="icon">📸</span><span>@waroenglawass · @sudutkedai_</span></div>
+        </div>
+        <a href="https://wa.me/6289532719664" class="loc-btn" target="_blank">
+          💬 Chat WhatsApp
+        </a>
+      </div>
+    </div>
+    <!-- CITRALAND -->
+    <div class="loc-card reveal">
+      <div class="loc-map">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3964.1!2d106.916!3d-6.360!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNsKwMjEnMzYuMCJTIDEwNsKwNTQnNTcuNiJF!5e0!3m2!1sid!2sid!4v1" loading="lazy" allowfullscreen></iframe>
+      </div>
+      <div class="loc-body">
+        <div class="loc-branch">Cabang 2</div>
+        <div class="loc-name">Citraland Cibubur</div>
+        <div class="loc-address">Woodland Park & Culinary<br>Gandoang, Cibubur<br>Bogor, Jawa Barat</div>
+        <div class="loc-contacts">
+          <div class="loc-contact"><span class="icon">📞</span><span>0895-3271-96647</span></div>
+          <div class="loc-contact"><span class="icon">📱</span><span>0821-2875-5505</span></div>
+          <div class="loc-contact"><span class="icon">📸</span><span>@waroenglawass · @sudutkedai_</span></div>
+        </div>
+        <a href="https://wa.me/6289532719664" class="loc-btn" target="_blank">
+          💬 Chat WhatsApp
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="section-label reveal" style="justify-content:center;margin-bottom:24px">Reservasi & Pemesanan</div>
+  <h2 class="cta-title reveal">Siap Bikin<br>Momen yang <em>Berkesan?</em></h2>
+  <p class="cta-sub reveal">Booking meja, pesan nasi box, atau tanyakan paket event langsung ke kami via WhatsApp.</p>
+  <div class="cta-actions reveal">
+    <a href="https://wa.me/6289532719664?text=Halo%20Sudut%20Kedai%2C%20saya%20mau%20reservasi" class="btn-wa" target="_blank">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Chat WhatsApp
+    </a>
+    <a href="https://instagram.com/sudutkedai_" class="btn-secondary" target="_blank">📸 Follow Instagram</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-brand-name">Sudut Kedai × Waroeng Soeroboyo</div>
+      <div class="footer-brand-sub">Lawas & Modern · Cileungsi, Bogor</div>
+      <p class="footer-brand-desc">Kafe modern yang memadukan kehangatan masakan Jawa Timur dengan gaya hidup urban masa kini. Tersedia untuk nongkrong, meeting, dan acara spesial.</p>
+      <div class="footer-socials">
+        <a href="https://instagram.com/sudutkedai_" class="footer-social" target="_blank">📸</a>
+        <a href="https://wa.me/6289532719664" class="footer-social" target="_blank">💬</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title">Menu</div>
+      <ul class="footer-links">
+        <li><a href="#menu">Sudut Kedai</a></li>
+        <li><a href="#menu">Waroeng Soeroboyo</a></li>
+        <li><a href="#menu">Camilan & Dessert</a></li>
+        <li><a href="#event">Paket Buffet</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Fasilitas</div>
+      <ul class="footer-links">
+        <li><a href="#">Live Music</a></li>
+        <li><a href="#">Meeting Room</a></li>
+        <li><a href="#">Reservasi Acara</a></li>
+        <li><a href="#">Nasi Box</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Kontak</div>
+      <ul class="footer-links">
+        <li><a href="tel:0895327196647">0895-3271-96647</a></li>
+        <li><a href="tel:082128755505">0821-2875-5505</a></li>
+        <li><a href="https://instagram.com/sudutkedai_" target="_blank">@sudutkedai_</a></li>
+        <li><a href="https://instagram.com/waroenglawass" target="_blank">@waroenglawass</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2025 Sudut Kedai × Waroeng Soeroboyo Lawas. All rights reserved.</div>
+    <a href="https://instagram.com/waroenglawass" class="footer-insta" target="_blank">@waroenglawass</a>
+  </div>
+</footer>
+
+<script>
+  // CURSOR
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  document.addEventListener('mousemove', e => {
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top = e.clientY + 'px';
+    setTimeout(() => {
+      ring.style.left = e.clientX + 'px';
+      ring.style.top = e.clientY + 'px';
+    }, 80);
+  });
+
+  // NAVBAR SCROLL
+  const nav = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // MENU TABS
+  function switchTab(id) {
+    document.querySelectorAll('.menu-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.menu-tab').forEach(t => t.classList.remove('active'));
+    document.getElementById('tab-' + id).classList.add('active');
+    event.target.classList.add('active');
+  }
+
+  // SCROLL REVEAL
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+
+  // MOBILE MENU
+  function toggleMenu() {
+    const links = document.querySelector('.nav-links');
+    if (!links.style.display || links.style.display === 'none') {
+      links.style.cssText = 'display:flex;flex-direction:column;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(20,14,9,.97);justify-content:center;align-items:center;gap:32px;z-index:200';
+    } else {
+      links.style.display = 'none';
+    }
+  }
+</script>
+</body>
+</html>
