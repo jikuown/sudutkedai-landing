@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Sudut Kedai × Waroeng Soeroboyo Lawas
 
 Landing page profesional untuk restoran/kafe di Cileungsi, Bogor.
@@ -86,3 +87,6 @@ export const makananTematik: MenuItem[] = [
 
 ## 👤 Developer
 Jiku — [@jikuown](https://instagram.com/jikuown)
+=======
+# sudutkedai-landing
+>>>>>>> 8bea9d9a45aa9392b7a672806daf5283f095c9e3
