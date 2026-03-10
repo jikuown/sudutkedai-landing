@@ -1,61 +1,88 @@
 # Sudut Kedai × Waroeng Soeroboyo Lawas
-### Restaurant & Café Landing Page — Cileungsi, Bogor
 
-A modern landing page for a dual-concept F&B brand combining a contemporary café
-(Sudut Kedai) with an authentic East Javanese heritage kitchen (Waroeng Soeroboyo Lawas).
+Landing page profesional untuk restoran/kafe di Cileungsi, Bogor.
+Dibangun dengan [Astro](https://astro.build) — framework modern untuk static sites.
 
-**Live:** [sudutkedai.netlify.app](https://sudutkedai.netlify.app)
+## 🔗 Live Demo
+[sudutkedai.netlify.app](https://sudutkedai.netlify.app)
 
----
-
-## Tech Stack
+## 🛠️ Tech Stack
 - [Astro 4](https://astro.build) — Static Site Generator
-- Vanilla CSS with Custom Properties
+- CSS Custom Properties (no framework)
 - Vanilla JavaScript
-- Netlify — Deployment & CI/CD
+- Netlify (deployment)
 
-## Features
-- Dual brand showcase with distinct visual identities
-- Menu data managed from a single source: `src/data/menu.ts`
-- Interactive tabbed menu (3 categories, 50+ items)
-- Buffet event packages (3 tiers)
-- 2 branch locations with Google Maps embed
-- WhatsApp direct CTA
-- Scroll reveal animations & custom cursor
-- Fully mobile responsive
-- SEO-ready with Open Graph meta tags
+## ✨ Features
+- Dual brand: Sudut Kedai (modern café) + Waroeng Soeroboyo (tradisional)
+- Menu data dikelola di satu file: `src/data/menu.ts`
+- Interactive menu tabs (3 kategori)
+- Paket buffet 3 tier (Lilium / Melati / Anggrek)
+- 2 lokasi + Google Maps embed
+- WhatsApp CTA langsung ke nomor bisnis
+- Scroll reveal animations
+- Custom cursor
+- Mobile responsive
+- SEO-ready (meta tags, OG tags)
 
-## Getting Started
+## 🚀 Cara Menjalankan
+
 ```bash
-npm install       # Install dependencies
-npm run dev       # Dev server → localhost:4321
-npm run build     # Production build
-npm run preview   # Preview production build
+# Install dependencies
+npm install
+
+# Development server (localhost:4321)
+npm run dev
+
+# Build untuk production
+npm run build
+
+# Preview hasil build
+npm run preview
 ```
 
-## Project Structure
+## 📁 Struktur Project
+
 ```
-src/
-├── components/     # Navbar, Hero, MarqueeBand, MenuSection
-├── data/
-│   └── menu.ts     # Edit all menu items here
-├── layouts/
-│   └── Layout.astro  # SEO meta tags
-├── pages/
-│   └── index.astro   # Main page
-└── styles/
-    └── global.css    # CSS variables & utilities
+sudutkedai-astro/
+├── src/
+│   ├── components/
+│   │   ├── Navbar.astro
+│   │   ├── Hero.astro
+│   │   ├── MarqueeBand.astro
+│   │   └── MenuSection.astro
+│   ├── data/
+│   │   └── menu.ts          ← Edit menu di sini
+│   ├── layouts/
+│   │   └── Layout.astro     ← SEO meta tags
+│   ├── pages/
+│   │   └── index.astro      ← Halaman utama
+│   └── styles/
+│       └── global.css       ← CSS variables & utilities
+├── public/                  ← Static assets (foto, dll)
+├── astro.config.mjs
+└── netlify.toml
 ```
 
-## Updating Menu Items
+## 📝 Cara Update Menu
 
-All menu data lives in `src/data/menu.ts`.
-Edit once → updates everywhere automatically.
+Semua data menu ada di **`src/data/menu.ts`**.
+Edit file itu → otomatis update di seluruh halaman. Tidak perlu edit HTML.
 
-## Deployment
+```ts
+// Contoh tambah menu baru
+export const makananTematik: MenuItem[] = [
+  { name: "Menu Baru", sub: "Deskripsi", price: "Rp 30.000", tag: "new" },
+  // ...
+];
+```
 
-Hosted on Netlify with automatic deployments.
-Every `git push` to `main` triggers a new build.
+## 🌐 Deploy ke Netlify
 
-## Developer
-Built by Jiku — [@jikuown](https://instagram.com/jikuown)
+1. Push ke GitHub
+2. Connect repo di [netlify.com](https://netlify.com)
+3. Build command: `npm run build`
+4. Publish directory: `dist`
+5. Auto-deploy setiap push ke main ✅
+
+## 👤 Developer
+Jiku — [@jikuown](https://instagram.com/jikuown)

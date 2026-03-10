@@ -4,7 +4,7 @@ import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar.astro';
 import Hero from '../components/Hero.astro';
 import MarqueeBand from '../components/MarqueeBand.astro';
-import MenuSection from '../components/MenuSection.astro';
+import MenuCarousel from '../components/MenuCarousel.astro';
 import '../styles/global.css';
 ---
 
@@ -28,6 +28,9 @@ import '../styles/global.css';
 
     <div class="dual-brand">
       <div class="brand-card modern reveal">
+        <div class="brand-img-wrap">
+          <img src="/brand-sudutkedai.jpg" alt="Sudut Kedai — Modern Café" />
+        </div>
         <div class="brand-icon">☕</div>
         <h3 class="brand-name">Sudut Kedai</h3>
         <p class="brand-tagline">The Modern Café Wing</p>
@@ -40,6 +43,9 @@ import '../styles/global.css';
         </p>
       </div>
       <div class="brand-card traditional reveal">
+        <div class="brand-img-wrap">
+          <img src="/brand-waroeng.jpg" alt="Waroeng Soeroboyo — Heritage Kitchen" />
+        </div>
         <div class="brand-icon">🍲</div>
         <h3 class="brand-name">Waroeng Soeroboyo Lawas</h3>
         <p class="brand-tagline">The Heritage Kitchen</p>
@@ -72,13 +78,20 @@ import '../styles/global.css';
     </div>
   </div>
 
-  <MenuSection />
+  <MenuCarousel />
 
   <!-- EVENT / BUFFET -->
   <section class="section" id="event">
     <div class="section-label reveal">Social Event</div>
     <h2 class="section-title reveal">Paket Buffet<br /><em style="color:var(--gold)">Sudut Lawas</em></h2>
     <p class="section-desc reveal">Cocok untuk birthday, arisan, reuni, engagement, hingga gathering kantor.</p>
+
+    <div class="event-room-img reveal">
+      <img src="/event-room.jpg" alt="Ruang Event Sudut Lawas" />
+      <div class="event-room-overlay">
+        <span>Meeting Room · Kapasitas 100 Pax</span>
+      </div>
+    </div>
 
     <div class="event-grid">
       {[
@@ -250,16 +263,20 @@ import '../styles/global.css';
 <style is:global>
   /* BRAND CARDS */
   .dual-brand { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; margin-top: 80px; }
-  .brand-card { padding: 60px 50px; position: relative; overflow: hidden; transition: transform 0.4s; }
+  .brand-card { position: relative; overflow: hidden; transition: transform 0.4s; }
   .brand-card:hover { transform: translateY(-4px); }
   .brand-card.modern    { background: linear-gradient(135deg, #1a2a1c, #0f1a10); border: 1px solid rgba(61,90,62,0.4); }
   .brand-card.traditional { background: linear-gradient(135deg, #2a1a0c, #1a0e05); border: 1px solid rgba(196,98,45,0.3); }
-  .brand-icon { width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; margin-bottom: 28px; }
+  .brand-img-wrap { width: 100%; height: 220px; overflow: hidden; }
+  .brand-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; filter: brightness(0.75); }
+  .brand-card:hover .brand-img-wrap img { transform: scale(1.05); filter: brightness(0.85); }
+  .brand-card > :not(.brand-img-wrap) { padding: 0 50px; }
+  .brand-icon { width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; margin-bottom: 20px; margin-top: 32px; }
   .brand-card.modern .brand-icon { background: rgba(61,90,62,0.4); border: 1px solid rgba(61,90,62,0.6); }
   .brand-card.traditional .brand-icon { background: rgba(196,98,45,0.2); border: 1px solid rgba(196,98,45,0.4); }
   .brand-name    { font-family: var(--font-display); font-size: 26px; font-weight: 700; color: var(--cream); margin-bottom: 10px; }
   .brand-tagline { font-size: 13px; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 20px; }
-  .brand-desc    { font-size: 14px; line-height: 1.8; color: var(--cream2); }
+  .brand-desc    { font-size: 14px; line-height: 1.8; color: var(--cream2); padding-bottom: 50px !important; }
 
   /* FACILITIES */
   .facilities-wrap { background: var(--bg2); padding: 0 60px 100px; }
@@ -269,6 +286,13 @@ import '../styles/global.css';
   .facility-icon { font-size: 36px; margin-bottom: 16px; display: block; }
   .facility-name { font-family: var(--font-display); font-size: 18px; color: var(--cream); margin-bottom: 8px; }
   .facility-desc { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+  /* EVENT ROOM IMAGE */
+  .event-room-img { position: relative; width: 100%; height: 280px; overflow: hidden; border-radius: 4px; margin: 40px 0 0; }
+  .event-room-img img { width: 100%; height: 100%; object-fit: cover; object-position: top; filter: brightness(0.7); transition: transform 0.6s; }
+  .event-room-img:hover img { transform: scale(1.03); }
+  .event-room-overlay { position: absolute; bottom: 0; left: 0; right: 0; padding: 20px 28px; background: linear-gradient(to top, rgba(0,0,0,0.7), transparent); }
+  .event-room-overlay span { font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); }
 
   /* EVENTS */
   .event-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 60px; }

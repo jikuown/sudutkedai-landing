@@ -1,0 +1,339 @@
+---
+// src/components/MenuCarousel.astro
+// Swiper Coverflow carousel untuk menu dengan foto
+
+interface MenuItem {
+  img: string;
+  name: string;
+  sub: string;
+  price: string;
+  tag?: string;
+  tagLabel?: string;
+}
+
+interface MenuCategory {
+  id: string;
+  label: string;
+  emoji: string;
+  items: MenuItem[];
+}
+
+const categories: MenuCategory[] = [
+  {
+    id: "andalan",
+    label: "Menu Andalan",
+    emoji: "⭐",
+    items: [
+      { img: "/menu/ayam-bakar-kecombrang.jpg", name: "Nasi Ayam Bakar Kecombrang", sub: "Waroeng Soeroboyo Lawas", price: "Rp 34.500", tag: "andalan", tagLabel: "⭐ Andalan" },
+      { img: "/menu/nasi-rawon.jpg",            name: "Nasi Rawon",                sub: "Waroeng Soeroboyo Lawas", price: "Rp 39.500", tag: "hits",    tagLabel: "Hits" },
+      { img: "/menu/kopi-beneran.jpg",           name: "Kopi Beneran",              sub: "Sudut Kedai Signature",   price: "Rp 27.000", tag: "andalan", tagLabel: "Signature" },
+      { img: "/menu/lontong-cap-gomeh.jpg",      name: "Lontong Cap Gomeh",         sub: "Waroeng Soeroboyo Lawas", price: "Rp 39.500", tag: "hits",    tagLabel: "Hits" },
+      { img: "/menu/soto-ayam.jpg",              name: "Soto Ayam Kampung",         sub: "Waroeng Soeroboyo Lawas", price: "Rp 34.500", tag: "andalan", tagLabel: "⭐ Andalan" },
+      { img: "/menu/lontong-balap.jpg",          name: "Lontong Balap",             sub: "Waroeng Soeroboyo Lawas", price: "Rp 33.500", tag: "hits",    tagLabel: "Hits" },
+    ]
+  },
+  {
+    id: "kopi",
+    label: "Kopi & Minuman",
+    emoji: "☕",
+    items: [
+      { img: "/menu/kopi-beneran.jpg",  name: "Kopi Beneran",        sub: "Signature",    price: "Rp 27.000", tag: "andalan", tagLabel: "Signature" },
+      { img: "/menu/tematik-04.jpg",    name: "Mexico Coffee",        sub: "Coffee",       price: "Rp 28.000" },
+      { img: "/menu/tematik-05.jpg",    name: "Caramel Machiato",     sub: "Coffee",       price: "Rp 27.000" },
+      { img: "/menu/tematik-06.jpg",    name: "Brown Sugar Latte",    sub: "Coffee",       price: "Rp 27.000", tag: "hits", tagLabel: "Hits" },
+      { img: "/menu/tematik-07.jpg",    name: "Avocado Coffee",       sub: "Coffee",       price: "Rp 29.000" },
+      { img: "/menu/tematik-08.jpg",    name: "Creamy Matcha",        sub: "Non-Coffee",   price: "Rp 26.000" },
+    ]
+  },
+  {
+    id: "makanan",
+    label: "Makanan",
+    emoji: "🍽️",
+    items: [
+      { img: "/menu/nasi-goreng-gila.jpg",    name: "Nasi Goreng Gila",     sub: "Tematik Sudut Kedai", price: "Rp 31.000", tag: "andalan", tagLabel: "Andalan" },
+      { img: "/menu/nasi-goreng-original.jpg",name: "Nasi Goreng Original",  sub: "Tematik Sudut Kedai", price: "Rp 29.000", tag: "hits",    tagLabel: "Hits" },
+      { img: "/menu/spagheti-bolognese.jpg",  name: "Spagheti Bolognese",   sub: "Western Fusion",      price: "Rp 29.000" },
+      { img: "/menu/mix-platter.jpg",         name: "Mix Platter",          sub: "Berbagi bareng",      price: "Rp 31.000", tag: "andalan", tagLabel: "Andalan" },
+      { img: "/menu/nasi-jangan-lodeh.jpg",   name: "Nasi Jangan Lodeh",    sub: "Waroeng Soeroboyo",   price: "Rp 33.500" },
+      { img: "/menu/tematik-14.jpg",          name: "Indomie Rebus Ngegas", sub: "Level pedas tersedia",price: "Rp 29.000", tag: "hits", tagLabel: "Hits" },
+    ]
+  },
+  {
+    id: "camilan",
+    label: "Camilan & Snack",
+    emoji: "🍟",
+    items: [
+      { img: "/menu/tematik-22.jpg",  name: "Tematik Snack (French Fries)", sub: "Crispy & gurih",    price: "Rp 22.000", tag: "hits",    tagLabel: "Hits" },
+      { img: "/menu/tematik-23.jpg",  name: "Singkong Nagih",               sub: "Keju + topping",    price: "Rp 17.000", tag: "andalan", tagLabel: "Andalan" },
+      { img: "/menu/tematik-24.jpg",  name: "Pisang Bakar",                 sub: "Topping premium",   price: "Rp 23.000" },
+      { img: "/menu/tematik-25.jpg",  name: "Roti Bakar",                   sub: "Tiramisu / Oreo",   price: "Rp 25.000", tag: "new",     tagLabel: "New" },
+      { img: "/menu/tematik-26.jpg",  name: "Tempe Mendoan",                sub: "Camilan Tradisional",price: "Rp 19.000", tag: "hits",   tagLabel: "Hits" },
+      { img: "/menu/tematik-27.jpg",  name: "Dimsum",                       sub: "Pilihan dim sum",   price: "Rp 25.000" },
+    ]
+  }
+];
+---
+
+<section class="section menu-carousel-section" id="menu">
+  <div class="section-label reveal">Pilihan Menu</div>
+  <h2 class="section-title reveal">
+    Dari Kopi Hingga<br />
+    <em style="color:var(--gold)">Rawon Otentik</em>
+  </h2>
+  <p class="section-desc reveal" style="margin-bottom:50px">
+    Geser untuk jelajahi menu kami. Dua karakter, satu tempat.
+  </p>
+
+  <!-- CATEGORY TABS -->
+  <div class="menu-tabs reveal">
+    {categories.map((cat, i) => (
+      <button
+        class={`menu-tab ${i === 0 ? 'active' : ''}`}
+        data-category={cat.id}
+      >
+        {cat.emoji} {cat.label}
+      </button>
+    ))}
+  </div>
+
+  <!-- SWIPER CAROUSELS -->
+  {categories.map((cat, i) => (
+    <div class={`swiper menu-swiper ${i === 0 ? 'active' : ''}`} id={`swiper-${cat.id}`}>
+      <div class="swiper-wrapper">
+        {cat.items.map(item => (
+          <div class="swiper-slide">
+            <div class="menu-card">
+              <div class="menu-card-img">
+                <img
+                  src={item.img}
+                  alt={item.name}
+                  onerror="this.parentElement.style.background='linear-gradient(135deg,#2a1a0c,#1a0e05)';this.style.display='none'"
+                />
+                {item.tag && (
+                  <div class={`menu-card-tag tag-${item.tag}`}>{item.tagLabel}</div>
+                )}
+              </div>
+              <div class="menu-card-body">
+                <div class="menu-card-name">{item.name}</div>
+                <div class="menu-card-sub">{item.sub}</div>
+                <div class="menu-card-price">{item.price}</div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+      <!-- Navigation -->
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-button-next"></div>
+      <div class="swiper-pagination"></div>
+    </div>
+  ))}
+
+  <!-- HINT TEXT -->
+  <p class="swipe-hint reveal">← Geser atau drag untuk jelajahi →</p>
+</section>
+
+<!-- SWIPER CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+<style>
+  .menu-carousel-section { background: var(--bg2); }
+
+  /* TABS */
+  .menu-tabs {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 48px;
+  }
+  .menu-tab {
+    padding: 10px 24px;
+    font-size: 12px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 3px;
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.3s;
+    font-family: var(--font-body);
+  }
+  .menu-tab.active {
+    background: var(--terra);
+    border-color: var(--terra);
+    color: #fff;
+  }
+  .menu-tab:hover:not(.active) {
+    color: var(--cream);
+    border-color: rgba(255,255,255,0.2);
+  }
+
+  /* SWIPER WRAPPER */
+  .menu-swiper {
+    display: none;
+    width: 100%;
+    padding: 40px 0 70px !important;
+  }
+  .menu-swiper.active { display: block; }
+
+  /* MENU CARD */
+  .menu-card {
+    background: var(--bg);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: border-color 0.3s;
+    height: 100%;
+  }
+  .swiper-slide-active .menu-card {
+    border-color: rgba(201,151,58,0.4);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+  }
+  .menu-card-img {
+    width: 100%;
+    height: 220px;
+    overflow: hidden;
+    position: relative;
+    background: linear-gradient(135deg, #2a1a0c, #1a0e05);
+  }
+  .menu-card-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+  .swiper-slide-active .menu-card-img img {
+    transform: scale(1.04);
+  }
+  .menu-card-tag {
+    position: absolute;
+    top: 12px; right: 12px;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 2px;
+    font-weight: 600;
+  }
+  .tag-andalan { background: var(--terra); color: #fff; }
+  .tag-hits    { background: var(--gold); color: var(--bg); }
+  .tag-new     { background: #3d5a3e; color: #6ab06c; }
+
+  .menu-card-body { padding: 22px 24px 28px; }
+  .menu-card-name {
+    font-family: var(--font-display);
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--cream);
+    margin-bottom: 6px;
+    line-height: 1.3;
+  }
+  .menu-card-sub  { font-size: 12px; color: var(--muted); letter-spacing: 0.5px; margin-bottom: 14px; }
+  .menu-card-price { font-size: 22px; font-weight: 700; color: var(--gold2); }
+
+  /* SWIPER OVERRIDES */
+  .swiper-button-prev,
+  .swiper-button-next {
+    color: var(--gold) !important;
+    background: rgba(20,14,9,0.8);
+    width: 44px !important;
+    height: 44px !important;
+    border-radius: 50%;
+    border: 1px solid rgba(201,151,58,0.3);
+  }
+  .swiper-button-prev::after,
+  .swiper-button-next::after {
+    font-size: 16px !important;
+    font-weight: 700;
+  }
+  .swiper-pagination-bullet {
+    background: var(--muted) !important;
+    opacity: 1 !important;
+  }
+  .swiper-pagination-bullet-active {
+    background: var(--gold) !important;
+    transform: scale(1.3);
+  }
+
+  .swipe-hint {
+    text-align: center;
+    font-size: 12px;
+    letter-spacing: 2px;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-top: 8px;
+  }
+
+  @media (max-width: 768px) {
+    .menu-tabs { gap: 6px; }
+    .menu-tab  { padding: 8px 16px; font-size: 11px; }
+  }
+</style>
+
+<!-- SWIPER JS -->
+<script>
+  import Swiper from 'swiper';
+  import { EffectCoverflow, Pagination, Navigation, Autoplay } from 'swiper/modules';
+  import 'swiper/css';
+  import 'swiper/css/effect-coverflow';
+  import 'swiper/css/pagination';
+  import 'swiper/css/navigation';
+
+  // Init all swipers
+  const swiperInstances: Record<string, Swiper> = {};
+
+  document.querySelectorAll('.menu-swiper').forEach((el) => {
+    const id = el.id;
+    swiperInstances[id] = new Swiper(`#${id}`, {
+      modules: [EffectCoverflow, Pagination, Navigation, Autoplay],
+      effect: 'coverflow',
+      grabCursor: true,
+      centeredSlides: true,
+      slidesPerView: 'auto',
+      coverflowEffect: {
+        rotate: 30,
+        stretch: 0,
+        depth: 120,
+        modifier: 1,
+        slideShadows: true,
+      },
+      pagination: {
+        el: `#${id} .swiper-pagination`,
+        clickable: true,
+      },
+      navigation: {
+        nextEl: `#${id} .swiper-button-next`,
+        prevEl: `#${id} .swiper-button-prev`,
+      },
+      autoplay: {
+        delay: 3500,
+        disableOnInteraction: true,
+        pauseOnMouseEnter: true,
+      },
+      breakpoints: {
+        320:  { slidesPerView: 1.2 },
+        640:  { slidesPerView: 2 },
+        1024: { slidesPerView: 3 },
+      },
+    });
+  });
+
+  // Tab switching
+  document.querySelectorAll('.menu-tab').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const cat = (btn as HTMLElement).dataset.category;
+
+      document.querySelectorAll('.menu-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.menu-swiper').forEach(s => s.classList.remove('active'));
+
+      btn.classList.add('active');
+      const target = document.getElementById(`swiper-${cat}`);
+      if (target) {
+        target.classList.add('active');
+        // Re-init swiper setelah visible
+        swiperInstances[`swiper-${cat}`]?.update();
+      }
+    });
+  });
+</script>
