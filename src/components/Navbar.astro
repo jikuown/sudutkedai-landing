@@ -18,7 +18,7 @@
       </a>
     </li>
   </ul>
-  <button class="hamburger" onclick="toggleMenu()" aria-label="Toggle menu">
+  <button class="hamburger" id="hamburger" aria-label="Toggle menu">
     <span></span><span></span><span></span>
   </button>
 </nav>
@@ -100,6 +100,8 @@
     border: none;
     cursor: pointer;
     padding: 4px;
+    z-index: 300;
+    position: relative;
   }
   .hamburger span {
     display: block;
@@ -107,11 +109,28 @@
     height: 2px;
     background: var(--cream);
     transition: all 0.3s;
+    transform-origin: center;
   }
+  /* Animasi jadi X saat menu open */
+  .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+  .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
   @media (max-width: 768px) {
     nav { padding: 18px 24px; }
     nav.scrolled { padding: 14px 24px; }
-    .nav-links { display: none; }
+    .nav-links {
+      display: none;
+      flex-direction: column;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(20,14,9,0.97);
+      justify-content: center;
+      align-items: center;
+      gap: 32px;
+      z-index: 200;
+    }
+    .nav-links.open { display: flex; }
     .hamburger { display: flex; }
   }
 </style>

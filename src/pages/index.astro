@@ -386,18 +386,25 @@ import '../styles/global.css';
 
 <!-- CLIENT-SIDE SCRIPTS -->
 <script>
-  // CURSOR
+  // CURSOR — hanya aktif di non-touch device
+  const isTouchDevice = window.matchMedia('(hover: none)').matches;
   const cursor = document.getElementById('cursor');
   const ring = document.getElementById('cursorRing');
   if (cursor && ring) {
-    document.addEventListener('mousemove', (e) => {
-      cursor.style.left = e.clientX + 'px';
-      cursor.style.top = e.clientY + 'px';
-      setTimeout(() => {
-        ring.style.left = e.clientX + 'px';
-        ring.style.top = e.clientY + 'px';
-      }, 80);
-    });
+    if (isTouchDevice) {
+      // Sembunyikan cursor di HP
+      cursor.style.display = 'none';
+      ring.style.display = 'none';
+    } else {
+      document.addEventListener('mousemove', (e) => {
+        cursor.style.left = e.clientX + 'px';
+        cursor.style.top = e.clientY + 'px';
+        setTimeout(() => {
+          ring.style.left = e.clientX + 'px';
+          ring.style.top = e.clientY + 'px';
+        }, 80);
+      });
+    }
   }
 
   // NAVBAR SCROLL
@@ -406,14 +413,20 @@ import '../styles/global.css';
     nav?.classList.toggle('scrolled', window.scrollY > 60);
   });
 
-  // MENU TABS
-  document.querySelectorAll('.menu-tab').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const tab = (btn as HTMLElement).dataset.tab;
-      document.querySelectorAll('.menu-panel').forEach(p => p.classList.remove('active'));
-      document.querySelectorAll('.menu-tab').forEach(t => t.classList.remove('active'));
-      document.getElementById(`tab-${tab}`)?.classList.add('active');
-      btn.classList.add('active');
+  // MOBILE HAMBURGER — toggle class .open
+  const hamburger = document.getElementById('hamburger');
+  const navLinks = document.querySelector('.nav-links') as HTMLElement;
+
+  hamburger?.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    navLinks?.classList.toggle('open');
+  });
+
+  // Tutup menu saat klik salah satu link
+  navLinks?.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      hamburger?.classList.remove('open');
+      navLinks.classList.remove('open');
     });
   });
 
@@ -427,13 +440,4 @@ import '../styles/global.css';
     });
   }, { threshold: 0.1 });
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-  // MOBILE MENU
-  (window as any).toggleMenu = () => {
-    const links = document.querySelector('.nav-links') as HTMLElement;
-    if (!links) return;
-    const isOpen = links.style.display === 'flex';
-    links.style.cssText = isOpen ? '' :
-      'display:flex;flex-direction:column;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(20,14,9,.97);justify-content:center;align-items:center;gap:32px;z-index:200';
-  };
 </script>

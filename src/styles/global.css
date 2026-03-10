@@ -40,6 +40,12 @@ body {
   cursor: none;
 }
 
+/* Restore cursor di touch device (HP/tablet) */
+@media (hover: none) {
+  body { cursor: auto; }
+  .cursor, .cursor-ring { display: none !important; }
+}
+
 /* CUSTOM CURSOR */
 .cursor {
   width: 10px;
