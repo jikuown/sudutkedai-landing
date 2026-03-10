@@ -390,44 +390,23 @@ import '../styles/global.css';
   const isTouchDevice = window.matchMedia('(hover: none)').matches;
   const cursor = document.getElementById('cursor');
   const ring = document.getElementById('cursorRing');
-  if (cursor && ring) {
-    if (isTouchDevice) {
-      // Sembunyikan cursor di HP
-      cursor.style.display = 'none';
-      ring.style.display = 'none';
-    } else {
-      document.addEventListener('mousemove', (e) => {
-        cursor.style.left = e.clientX + 'px';
-        cursor.style.top = e.clientY + 'px';
-        setTimeout(() => {
-          ring.style.left = e.clientX + 'px';
-          ring.style.top = e.clientY + 'px';
-        }, 80);
-      });
-    }
+  if (cursor && ring && !isTouchDevice) {
+    document.addEventListener('mousemove', (e) => {
+      cursor.classList.add('active');
+      ring.classList.add('active');
+      cursor.style.left = e.clientX + 'px';
+      cursor.style.top = e.clientY + 'px';
+      setTimeout(() => {
+        ring.style.left = e.clientX + 'px';
+        ring.style.top = e.clientY + 'px';
+      }, 80);
+    });
   }
 
   // NAVBAR SCROLL
   const nav = document.getElementById('navbar');
   window.addEventListener('scroll', () => {
     nav?.classList.toggle('scrolled', window.scrollY > 60);
-  });
-
-  // MOBILE HAMBURGER — toggle class .open
-  const hamburger = document.getElementById('hamburger');
-  const navLinks = document.querySelector('.nav-links') as HTMLElement;
-
-  hamburger?.addEventListener('click', () => {
-    hamburger.classList.toggle('open');
-    navLinks?.classList.toggle('open');
-  });
-
-  // Tutup menu saat klik salah satu link
-  navLinks?.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => {
-      hamburger?.classList.remove('open');
-      navLinks.classList.remove('open');
-    });
   });
 
   // SCROLL REVEAL

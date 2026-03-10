@@ -7,7 +7,7 @@
     <span>Sudut Kedai × Waroeng Soeroboyo</span>
     <span>Cileungsi · Cibubur</span>
   </div>
-  <ul class="nav-links">
+  <ul class="nav-links" id="navLinks">
     <li><a href="#tentang">Tentang</a></li>
     <li><a href="#menu">Menu</a></li>
     <li><a href="#event">Event</a></li>
@@ -27,7 +27,7 @@
   nav {
     position: fixed;
     top: 0; left: 0; right: 0;
-    z-index: 100;
+    z-index: 1000;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -35,7 +35,7 @@
     transition: all 0.4s;
   }
   nav.scrolled {
-    background: rgba(20,14,9,0.92);
+    background: rgba(20,14,9,0.95);
     backdrop-filter: blur(12px);
     padding: 16px 60px;
     border-bottom: 1px solid rgba(201,151,58,0.15);
@@ -44,6 +44,8 @@
     display: flex;
     flex-direction: column;
     gap: 2px;
+    position: relative;
+    z-index: 1100;
   }
   .nav-logo span:first-child {
     font-family: var(--font-display);
@@ -58,10 +60,14 @@
     text-transform: uppercase;
     color: var(--muted);
   }
+
+  /* DESKTOP */
   .nav-links {
     display: flex;
     gap: 36px;
     list-style: none;
+    margin: 0;
+    padding: 0;
   }
   .nav-links a {
     color: var(--cream2);
@@ -92,6 +98,8 @@
   }
   .nav-cta:hover { background: #a84f22 !important; }
   .nav-cta::after { display: none !important; }
+
+  /* HAMBURGER */
   .hamburger {
     display: none;
     flex-direction: column;
@@ -99,9 +107,9 @@
     background: none;
     border: none;
     cursor: pointer;
-    padding: 4px;
-    z-index: 300;
+    padding: 8px;
     position: relative;
+    z-index: 1100;
   }
   .hamburger span {
     display: block;
@@ -111,26 +119,71 @@
     transition: all 0.3s;
     transform-origin: center;
   }
-  /* Animasi jadi X saat menu open */
   .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
   .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
   .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
+  /* MOBILE */
   @media (max-width: 768px) {
     nav { padding: 18px 24px; }
     nav.scrolled { padding: 14px 24px; }
+    .hamburger { display: flex; }
+
     .nav-links {
-      display: none;
-      flex-direction: column;
+      /* Mobile overlay — PISAH dari nav flow */
       position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(20,14,9,0.97);
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(14, 9, 4, 0.98);
+      flex-direction: column;
       justify-content: center;
       align-items: center;
-      gap: 32px;
-      z-index: 200;
+      gap: 36px;
+      z-index: 1050;
+      /* Pakai opacity + visibility biar transisi smooth */
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+      pointer-events: none;
     }
-    .nav-links.open { display: flex; }
-    .hamburger { display: flex; }
+    .nav-links.open {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+    .nav-links li { list-style: none; }
+    .nav-links a {
+      font-size: 20px;
+      letter-spacing: 3px;
+      color: var(--cream);
+    }
+    .nav-links a::after { display: none; }
+    .nav-cta {
+      padding: 14px 36px !important;
+      font-size: 16px !important;
+    }
   }
 </style>
+
+<script>
+  const hamburger = document.getElementById('hamburger');
+  const navLinks  = document.getElementById('navLinks');
+
+  hamburger?.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    navLinks?.classList.toggle('open');
+    // Cegah scroll background saat menu terbuka
+    document.body.style.overflow =
+      navLinks?.classList.contains('open') ? 'hidden' : '';
+  });
+
+  // Tutup menu saat link diklik
+  navLinks?.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      hamburger?.classList.remove('open');
+      navLinks.classList.remove('open');
+      document.body.style.overflow = '';
+    });
+  });
+</script>
