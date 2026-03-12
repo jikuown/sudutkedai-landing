@@ -4,34 +4,34 @@
 
 const allMenu = [
   // ── WAROENG SOEROBOYO ──
-  { img: "/menu/ayam-bakar-kecombrang.jpg", name: "Ayam Bakar Kecombrang", sub: "Waroeng Soeroboyo", price: "Rp 34.500", tag: "andalan" },
-  { img: "/menu/nasi-rawon.jpg",            name: "Nasi Rawon",            sub: "Waroeng Soeroboyo", price: "Rp 39.500", tag: "hits" },
-  { img: "/menu/soto-ayam.jpg",             name: "Soto Ayam Kampung",     sub: "Waroeng Soeroboyo", price: "Rp 34.500", tag: "andalan" },
-  { img: "/menu/lontong-cap-gomeh.jpg",     name: "Lontong Cap Gomeh",     sub: "Waroeng Soeroboyo", price: "Rp 39.500", tag: "hits" },
-  { img: "/menu/lontong-balap.jpg",         name: "Lontong Balap",         sub: "Waroeng Soeroboyo", price: "Rp 33.500", tag: "hits" },
-  { img: "/menu/nasi-jangan-lodeh.jpg",     name: "Nasi Jangan Lodeh",     sub: "Waroeng Soeroboyo", price: "Rp 33.500" },
+  { img: "/menu/ayam-bakar-kecombrang.jpg", name: "Ayam Bakar Kecombrang", sub: "Waroeng Soeroboyo", price: "Rp 34.500", tag: "andalan", cat: "andalan" },
+  { img: "/menu/nasi-rawon.jpg",            name: "Nasi Rawon",            sub: "Waroeng Soeroboyo", price: "Rp 39.500", tag: "hits",    cat: "andalan" },
+  { img: "/menu/soto-ayam.jpg",             name: "Soto Ayam Kampung",     sub: "Waroeng Soeroboyo", price: "Rp 34.500", tag: "andalan", cat: "andalan" },
+  { img: "/menu/lontong-cap-gomeh.jpg",     name: "Lontong Cap Gomeh",     sub: "Waroeng Soeroboyo", price: "Rp 39.500", tag: "hits",    cat: "makanan" },
+  { img: "/menu/lontong-balap.jpg",         name: "Lontong Balap",         sub: "Waroeng Soeroboyo", price: "Rp 33.500", tag: "hits",    cat: "makanan" },
+  { img: "/menu/nasi-jangan-lodeh.jpg",     name: "Nasi Jangan Lodeh",     sub: "Waroeng Soeroboyo", price: "Rp 33.500",                 cat: "makanan" },
 
   // ── SUDUT KEDAI — KOPI ──
-  { img: "/menu/kopi-beneran.jpg",          name: "Kopi Beneran",          sub: "Sudut Kedai",       price: "Rp 27.000", tag: "signature" },
-  { img: "/menu/tematik-04.jpg",            name: "Mexico Coffee",         sub: "Sudut Kedai",       price: "Rp 28.000" },
-  { img: "/menu/tematik-05.jpg",            name: "Caramel Machiato",      sub: "Sudut Kedai",       price: "Rp 27.000" },
-  { img: "/menu/tematik-06.jpg",            name: "Brown Sugar Latte",     sub: "Sudut Kedai",       price: "Rp 27.000", tag: "hits" },
-  { img: "/menu/tematik-07.jpg",            name: "Avocado Coffee",        sub: "Sudut Kedai",       price: "Rp 29.000" },
-  { img: "/menu/tematik-08.jpg",            name: "Creamy Matcha",         sub: "Sudut Kedai",       price: "Rp 26.000" },
+  { img: "/menu/kopi-beneran.jpg",          name: "Kopi Beneran",          sub: "Sudut Kedai",       price: "Rp 27.000", tag: "signature", cat: "kopi" },
+  { img: "/menu/tematik-04.jpg",            name: "Mexico Coffee",         sub: "Sudut Kedai",       price: "Rp 28.000",                   cat: "kopi" },
+  { img: "/menu/tematik-05.jpg",            name: "Caramel Machiato",      sub: "Sudut Kedai",       price: "Rp 27.000",                   cat: "kopi" },
+  { img: "/menu/tematik-06.jpg",            name: "Brown Sugar Latte",     sub: "Sudut Kedai",       price: "Rp 27.000", tag: "hits",       cat: "kopi" },
+  { img: "/menu/tematik-07.jpg",            name: "Avocado Coffee",        sub: "Sudut Kedai",       price: "Rp 29.000",                   cat: "non-coffee" },
+  { img: "/menu/tematik-08.jpg",            name: "Creamy Matcha",         sub: "Sudut Kedai",       price: "Rp 26.000",                   cat: "non-coffee" },
 
   // ── SUDUT KEDAI — MAKANAN ──
-  { img: "/menu/nasi-goreng-gila.jpg",      name: "Nasi Goreng Gila",      sub: "Sudut Kedai",       price: "Rp 31.000", tag: "andalan" },
-  { img: "/menu/nasi-goreng-original.jpg",  name: "Nasi Goreng Original",  sub: "Sudut Kedai",       price: "Rp 29.000", tag: "hits" },
-  { img: "/menu/spagheti-bolognese.jpg",    name: "Spagheti Bolognese",    sub: "Sudut Kedai",       price: "Rp 29.000" },
-  { img: "/menu/mix-platter.jpg",           name: "Mix Platter",           sub: "Sudut Kedai",       price: "Rp 31.000", tag: "andalan" },
-  { img: "/menu/tematik-14.jpg",            name: "Indomie Rebus Ngegas",  sub: "Sudut Kedai",       price: "Rp 29.000", tag: "hits" },
+  { img: "/menu/nasi-goreng-gila.jpg",      name: "Nasi Goreng Gila",      sub: "Sudut Kedai",       price: "Rp 31.000", tag: "andalan", cat: "makanan" },
+  { img: "/menu/nasi-goreng-original.jpg",  name: "Nasi Goreng Original",  sub: "Sudut Kedai",       price: "Rp 29.000", tag: "hits",    cat: "makanan" },
+  { img: "/menu/spagheti-bolognese.jpg",    name: "Spagheti Bolognese",    sub: "Sudut Kedai",       price: "Rp 29.000",                 cat: "makanan" },
+  { img: "/menu/mix-platter.jpg",           name: "Mix Platter",           sub: "Sudut Kedai",       price: "Rp 31.000", tag: "andalan", cat: "makanan" },
+  { img: "/menu/tematik-14.jpg",            name: "Indomie Rebus Ngegas",  sub: "Sudut Kedai",       price: "Rp 29.000", tag: "hits",    cat: "makanan" },
 
   // ── CAMILAN ──
-  { img: "/menu/tematik-22.jpg",            name: "French Fries",          sub: "Sudut Kedai Snack", price: "Rp 22.000", tag: "hits" },
-  { img: "/menu/tematik-23.jpg",            name: "Singkong Nagih",        sub: "Sudut Kedai Snack", price: "Rp 17.000", tag: "andalan" },
-  { img: "/menu/tematik-24.jpg",            name: "Pisang Bakar",          sub: "Sudut Kedai Snack", price: "Rp 23.000" },
-  { img: "/menu/tematik-25.jpg",            name: "Roti Bakar",            sub: "Sudut Kedai Snack", price: "Rp 25.000" },
-  { img: "/menu/tematik-26.jpg",            name: "Tempe Mendoan",         sub: "Sudut Kedai Snack", price: "Rp 19.000", tag: "hits" },
+  { img: "/menu/tematik-22.jpg",            name: "French Fries",          sub: "Sudut Kedai Snack", price: "Rp 22.000", tag: "hits",    cat: "snack" },
+  { img: "/menu/tematik-23.jpg",            name: "Singkong Nagih",        sub: "Sudut Kedai Snack", price: "Rp 17.000", tag: "andalan", cat: "snack" },
+  { img: "/menu/tematik-24.jpg",            name: "Pisang Bakar",          sub: "Sudut Kedai Snack", price: "Rp 23.000",                 cat: "snack" },
+  { img: "/menu/tematik-25.jpg",            name: "Roti Bakar",            sub: "Sudut Kedai Snack", price: "Rp 25.000",                 cat: "snack" },
+  { img: "/menu/tematik-26.jpg",            name: "Tempe Mendoan",         sub: "Sudut Kedai Snack", price: "Rp 19.000", tag: "hits",    cat: "snack" },
 ];
 
 const tagMap: Record<string, { label: string; cls: string }> = {
@@ -54,8 +54,12 @@ const tagMap: Record<string, { label: string; cls: string }> = {
       {allMenu.map(item => {
         const tagInfo = item.tag ? tagMap[item.tag] : null;
         return (
-          <div class="swiper-slide">
-            <div class="menu-card">
+          <div class="swiper-slide" data-cat={item.cat}>
+            <a
+              class="menu-card glightbox"
+              href={item.img}
+              data-gallery="menu-gallery"
+            >
               <img
                 src={item.img}
                 alt={item.name}
@@ -70,21 +74,29 @@ const tagMap: Record<string, { label: string; cls: string }> = {
                 <h3 class="menu-name">{item.name}</h3>
                 <p class="menu-price">{item.price}</p>
               </div>
-            </div>
+            </a>
           </div>
         );
       })}
     </div>
-
-    <div class="swiper-button-prev"></div>
-    <div class="swiper-button-next"></div>
     <div class="swiper-pagination"></div>
+  </div>
+
+  <!-- PILL FILTERS — di bawah carousel -->
+  <div class="menu-filters reveal">
+    <button class="pill active" data-filter="all">Semua</button>
+    <button class="pill" data-filter="andalan">⭐ Andalan</button>
+    <button class="pill" data-filter="kopi">☕ Kopi</button>
+    <button class="pill" data-filter="non-coffee">🧋 Non-Coffee</button>
+    <button class="pill" data-filter="makanan">🍽️ Makanan</button>
+    <button class="pill" data-filter="snack">🍟 Snack</button>
   </div>
 
   <p class="swipe-hint reveal">← Geser atau drag untuk jelajahi →</p>
 </section>
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
 
 <style>
   .menu-section { background: var(--bg2); }
@@ -167,20 +179,39 @@ const tagMap: Record<string, { label: string; cls: string }> = {
   .tag-hits      { background: #c4732c; color: #fff; }
   .tag-signature { background: rgba(201,151,58,0.92); color: #1a0e05; font-weight: 800; }
 
-  .swiper-button-prev,
-  .swiper-button-next {
-    color: var(--gold) !important;
-    background: rgba(15,10,5,0.85);
-    width: 44px !important;
-    height: 44px !important;
-    border-radius: 50%;
-    border: 1px solid rgba(201,151,58,0.3);
-    top: 45% !important;
-  }
-  .swiper-button-prev::after,
-  .swiper-button-next::after { font-size: 14px !important; font-weight: 800; }
   .swiper-pagination-bullet { background: var(--muted) !important; opacity: 1 !important; }
   .swiper-pagination-bullet-active { background: var(--gold) !important; transform: scale(1.3); }
+
+  /* PILL FILTERS */
+  .menu-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 28px;
+    justify-content: center;
+  }
+  .pill {
+    padding: 8px 20px;
+    border-radius: 999px;
+    font-size: 12px;
+    letter-spacing: 1px;
+    font-family: var(--font-body);
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.25s;
+    white-space: nowrap;
+  }
+  .pill:hover {
+    color: var(--cream);
+    border-color: rgba(255,255,255,0.25);
+  }
+  .pill.active {
+    background: var(--terra);
+    border-color: var(--terra);
+    color: #fff;
+  }
 
   .swipe-hint {
     text-align: center;
@@ -200,13 +231,12 @@ const tagMap: Record<string, { label: string; cls: string }> = {
 
 <script>
   import Swiper from 'swiper';
-  import { Navigation, Pagination, Autoplay } from 'swiper/modules';
+  import { Pagination, Autoplay } from 'swiper/modules';
   import 'swiper/css';
-  import 'swiper/css/navigation';
   import 'swiper/css/pagination';
 
   new Swiper('.menu-swiper', {
-    modules: [Navigation, Pagination, Autoplay],
+    modules: [Pagination, Autoplay],
     slidesPerView: 'auto',
     spaceBetween: 20,
     grabCursor: true,
@@ -216,13 +246,46 @@ const tagMap: Record<string, { label: string; cls: string }> = {
       disableOnInteraction: true,
       pauseOnMouseEnter: true,
     },
-    navigation: {
-      nextEl: '.menu-swiper .swiper-button-next',
-      prevEl: '.menu-swiper .swiper-button-prev',
-    },
     pagination: {
       el: '.menu-swiper .swiper-pagination',
       clickable: true,
     },
+  });
+
+  // GLIGHTBOX
+  const glightboxScript = document.createElement('script');
+  glightboxScript.src = 'https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js';
+  glightboxScript.onload = () => {
+    (window as any).GLightbox({
+      selector: '.glightbox',
+      touchNavigation: true,
+      loop: true,
+      closeButton: true,
+      slideEffect: 'slide',
+      descPosition: 'none',
+    });
+  };
+  document.head.appendChild(glightboxScript);
+
+  // PILL FILTER
+  document.querySelectorAll('.pill').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const filter = (btn as HTMLElement).dataset.filter;
+
+      // Update active pill
+      document.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+
+      // Show/hide slides
+      document.querySelectorAll('.menu-swiper .swiper-slide').forEach(slide => {
+        const el = slide as HTMLElement;
+        if (filter === 'all' || el.dataset.cat === filter) {
+          el.style.display = '';
+          el.style.opacity = '1';
+        } else {
+          el.style.display = 'none';
+        }
+      });
+    });
   });
 </script>
