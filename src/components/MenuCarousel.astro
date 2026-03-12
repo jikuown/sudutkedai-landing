@@ -131,15 +131,15 @@ const tagMap: Record<string, { label: string; cls: string }> = {
   }
   .menu-card:hover img { transform: scale(1.06); }
 
-  /* GLASS INFO di bawah */
+  /* GLASS INFO On Top */
   .menu-info {
     position: absolute;
-    bottom: 0; left: 0; right: 0;
+    top: 0; left: 0; right: 0;
     padding: 14px 16px 16px;
     background: rgba(10, 6, 3, 0.55);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    border-top: 1px solid rgba(201,151,58,0.2);
+    border-bottom: 1px solid rgba(201,151,58,0.2);
   }
   .menu-sub {
     font-size: 9px;
@@ -165,7 +165,7 @@ const tagMap: Record<string, { label: string; cls: string }> = {
   /* TAG pojok kiri atas */
   .menu-tag {
     position: absolute;
-    top: 10px; left: 10px;
+    bottom: 10px; right: 10px;
     font-size: 10px;
     font-weight: 700;
     letter-spacing: 1px;
@@ -179,9 +179,7 @@ const tagMap: Record<string, { label: string; cls: string }> = {
   .tag-hits      { background: #c4732c; color: #fff; }
   .tag-signature { background: rgba(201,151,58,0.92); color: #1a0e05; font-weight: 800; }
 
-  .swiper-pagination-bullet { background: var(--muted) !important; opacity: 1 !important; }
-  .swiper-pagination-bullet-active { background: var(--gold) !important; transform: scale(1.3); }
-
+  
   /* PILL FILTERS */
   .menu-filters {
     display: flex;
@@ -245,10 +243,6 @@ const tagMap: Record<string, { label: string; cls: string }> = {
       delay: 2800,
       disableOnInteraction: true,
       pauseOnMouseEnter: true,
-    },
-    pagination: {
-      el: '.menu-swiper .swiper-pagination',
-      clickable: true,
     },
   });
 
